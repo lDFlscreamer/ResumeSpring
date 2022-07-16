@@ -23,6 +23,7 @@ public class AuthController {
 
     @GetMapping(value ="/user" )
     public String test() {
+        logger.info("test");
         return "test.entrySet()";
     }
 }
