@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -28,9 +29,11 @@ public class AuthController {
     }
 
     @GetMapping(value = "/GetUser")
-    public String getUser() {
+    public Map<String, String> getUser() {
         logger.info("getUser");
-        return null;
+        Map<String, String> user = new HashMap<>();
+        user.put("username","test");
+        return user;
     }
 
 }
