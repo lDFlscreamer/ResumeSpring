@@ -17,13 +17,19 @@ public class AuthController {
     public void process(@RequestBody Map<String, Object> payload)
             throws Exception {
         logger.info(payload.toString());
+
     }
-
-
 
     @GetMapping(value ="/user" )
-    public String test() {
-        logger.info("test");
-        return "test.entrySet()";
+    public String test(@RequestHeader Map<String, String> headers) {
+        logger.info(headers.toString());
+        return null;
     }
+
+    @GetMapping(value ="/GetUser" )
+    public String getUser() {
+        logger.info("getUser");
+        return null;
+    }
+
 }
