@@ -23,7 +23,7 @@ public class AuthController {
     }
 
     @GetMapping(value = "/user")
-    public String test(@RequestHeader Map<String, String> headers) {
+    public String test(@RequestBody Map<String, String> headers) {
         logger.info(headers.toString());
         return null;
     }
