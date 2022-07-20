@@ -28,11 +28,14 @@ public class AuthController {
         return null;
     }
 
-    @GetMapping(value = "/GetUser")
+    @GetMapping(value = "/GetUser",
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, String> getUser() {
         logger.info("getUser");
         Map<String, String> user = new HashMap<>();
-        user.put("username","test");
+        user.put("user_id","test");
+        user.put("nickname","test");
+        user.put("email","test");
         return user;
     }
 
