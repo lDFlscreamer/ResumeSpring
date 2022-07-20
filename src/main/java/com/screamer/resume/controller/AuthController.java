@@ -17,14 +17,14 @@ public class AuthController {
     @PostMapping(
             value = "/user",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Object process(@RequestBody Object payload)
+    public Map<String, Object> process(@RequestBody Map<String, Object> payload)
             throws Exception {
         logger.info(payload.toString());
         return payload;
     }
 
     @GetMapping(value = "/user")
-    @ResponseStatus( HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.CREATED)
     public String test(@RequestBody Map<String, String> headers) {
         logger.info(headers.toString());
         return null;
@@ -35,9 +35,9 @@ public class AuthController {
     public Map<String, String> getUser() {
         logger.info("getUser");
         Map<String, String> user = new HashMap<>();
-        user.put("user_id","test");
-        user.put("nickname","test");
-        user.put("email","test");
+        user.put("user_id", "test");
+        user.put("nickname", "test");
+        user.put("email", "test");
         return user;
     }
 
