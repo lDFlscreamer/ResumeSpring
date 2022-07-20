@@ -19,7 +19,7 @@ public class AuthController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public Map<String, Object> process(@RequestBody Map<String, Object> payload)
             throws Exception {
-        logger.info(payload.toString());
+        logger.info("user_create",payload.toString());
         return payload;
     }
 
