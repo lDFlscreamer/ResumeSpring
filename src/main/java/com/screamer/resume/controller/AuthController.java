@@ -17,7 +17,7 @@ public class AuthController {
     @PostMapping(
             value = "/user",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, Object> process(@RequestBody Map<String, Object> payload)
+    public Object process(@RequestBody Object payload)
             throws Exception {
         logger.info("user_create",payload.toString());
         return payload;
