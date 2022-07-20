@@ -3,6 +3,7 @@ package com.screamer.resume.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,7 @@ public class AuthController {
     }
 
     @GetMapping(value = "/user")
+    @ResponseStatus( HttpStatus.CREATED)
     public String test(@RequestBody Map<String, String> headers) {
         logger.info(headers.toString());
         return null;
