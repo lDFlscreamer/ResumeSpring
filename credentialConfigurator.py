@@ -21,7 +21,7 @@ def read_from_properties(propertiesFileSrc: str):
     f.close()
 
 if __name__ == "__main__":
-    propertiesFileSrc = "./src/main/resources/application.properties"
+    propertiesFileSrc = "src/main/resources/application.properties"
     write_to_properties(propertiesFileSrc)
     read_from_properties(propertiesFileSrc)
 
