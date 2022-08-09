@@ -3,16 +3,16 @@ import os
 
 def write_to_properties(propertiesFileSrc: str):
     f = open(propertiesFileSrc, "a")
-    f.write("#Creadetials")
-    f.write(f"auth0.audience={os.getenv('AUTH0_AUDIENCE')}")
-    f.write(f"auth0.domain={os.getenv('AUTH0_DOMAIN')}")
-    f.write(f"")
-    f.write(f"linkedin.consumerKey={os.getenv('LINKED_IN_CONSUMER_KEY')}")
-    f.write(f"linkedin.consumerSecret={os.getenv('LINKED_IN_CONSUMER_SECRET')}")
-    f.write(f"")
-    f.write(f"spring.data.mongodb.database={os.getenv('MONGO_DB_NAME')}")
-    f.write(f"spring.data.mongodb.password={os.getenv('MONGO_DB_PASS')}")
-    f.write(f"spring.data.mongodb.username={os.getenv('MONGO_DB_USERNAME')}")
+    f.write("#Creadetials\n")
+    f.write(f"auth0.audience={os.getenv('AUTH0_AUDIENCE')}\n")
+    f.write(f"auth0.domain={os.getenv('AUTH0_DOMAIN')}\n")
+    f.write(f"\n")
+    f.write(f"linkedin.consumerKey={os.getenv('LINKED_IN_CONSUMER_KEY')}\n")
+    f.write(f"linkedin.consumerSecret={os.getenv('LINKED_IN_CONSUMER_SECRET')}\n")
+    f.write(f"\n")
+    f.write(f"spring.data.mongodb.database={os.getenv('MONGO_DB_NAME')}\n")
+    f.write(f"spring.data.mongodb.password={os.getenv('MONGO_DB_PASS')}\n")
+    f.write(f"spring.data.mongodb.username={os.getenv('MONGO_DB_USERNAME')}\n")
     f.close()
 
 def read_from_properties(propertiesFileSrc: str):
