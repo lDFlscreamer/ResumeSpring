@@ -17,8 +17,8 @@ import java.util.Map;
  */
 // TODO: 28.07.2022 change realisation of auth0 methods
 @RestController
-public class AuthController {
-    Logger logger = LoggerFactory.getLogger(AuthController.class);
+public class Auth0RestController {
+    Logger logger = LoggerFactory.getLogger(Auth0RestController.class);
 
     /**
      * @param payload auth0 user profile
