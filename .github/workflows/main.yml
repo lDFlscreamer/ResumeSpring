@@ -9,11 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
       - uses: actions/setup-python@v4
         with:
           python-version: '3.10'
-        - name: prepare a secrets
+      - name: prepare a secrets
         env:
           AUTH0_AUDIENCE: ${{AUTH0_AUDIENCE}}
           AUTH0_DOMAIN: ${{AUTH0_DOMAIN}}
@@ -23,6 +24,7 @@ jobs:
           MONGO_DB_PASS: ${{MONGO_DB_PASS}}
           MONGO_DB_USERNAME: ${{MONGO_DB_USERNAME}}
         run: python credentialConfigurator.py
+
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
