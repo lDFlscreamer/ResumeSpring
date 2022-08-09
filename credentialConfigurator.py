@@ -18,6 +18,7 @@ def write_to_properties(propertiesFileSrc: str):
 def read_from_properties(propertiesFileSrc: str):
     f = open(propertiesFileSrc, "r")
     print(f.read())
+    f.close()
 
 if __name__ == "__main__":
     propertiesFileSrc = "./src/main/resources/application.properties"
