@@ -1,4 +1,4 @@
-package com.screamer.resume.controller;
+package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.service.LinkedInApiUrlHandler;
 import org.springframework.beans.factory.annotation.Autowired;

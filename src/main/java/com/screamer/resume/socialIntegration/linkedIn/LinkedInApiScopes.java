@@ -1,4 +1,4 @@
-package com.screamer.resume.socialIntegration.linkedIn.apiScopes;
+package com.screamer.resume.socialIntegration.linkedIn;
 
 public enum LinkedInApiScopes {
     FULL_PROFILE("r_fullprofile"),
