@@ -1,4 +1,4 @@
-package com.screamer.resume.linkedInApi;
+package com.screamer.resume.socialIntegration.linkedIn.ApiTemplate;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -6,7 +6,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LinkedInApiHttpTemplate {
+class LinkedInApiHttpTemplate {
     protected String httpString;
     protected Map<String,Object> parameters;
 
@@ -17,7 +17,7 @@ public class LinkedInApiHttpTemplate {
     }
 
 
-    public LinkedInApiHttpTemplate() {
+    private LinkedInApiHttpTemplate() {
         this.parameters= new HashMap<>();
     }
 
