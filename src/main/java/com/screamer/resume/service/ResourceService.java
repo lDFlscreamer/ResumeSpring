@@ -1,5 +1,6 @@
 package com.screamer.resume.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -9,10 +10,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 
-import static com.screamer.resume.constant.ResourcePathConstant.javaCvRelatedPath;
 
 @Service
 public class ResourceService {
+
+    @Value("${resume.CV.JAVA.path}")
+    private String javaCvRelatedPath;
 
     public Resource getJavaCV() {
         try {

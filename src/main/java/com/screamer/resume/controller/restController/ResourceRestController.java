@@ -1,7 +1,6 @@
 package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.service.ResourceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
