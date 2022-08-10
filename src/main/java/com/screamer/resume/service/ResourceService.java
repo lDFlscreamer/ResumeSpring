@@ -2,38 +2,31 @@ package com.screamer.resume.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Optional;
-
 
 @Service
 public class ResourceService {
 
+    final ResourceLoader resourceLoader;
     @Value("${resume.CV.JAVA.path}")
     private String javaCvRelatedPath;
+
+    public ResourceService(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
+
 
     public Resource getJavaCV() {
         return getJavaCvResource();
     }
 
     private Resource getJavaCvResource() {
-        URL javCvUrl = getResourceURL(javaCvRelatedPath);
-        return getResource(javCvUrl);
+        return getResource(javaCvRelatedPath);
     }
 
-    private Resource getResource(URL resourceUrl) {
-        return new UrlResource(resourceUrl);
-    }
-
-    private URL getResourceURL(String path){
-        return getClass().getResource(path);
+    private Resource getResource(String path) {
+        return resourceLoader.getResource("classpath:".concat(path));
     }
 
 }
