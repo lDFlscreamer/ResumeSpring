@@ -1,11 +1,11 @@
-package com.screamer.resume.socialIntegration.linkedIn.apiScopes;
+package com.screamer.resume.socialIntegration.linkedIn;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static com.screamer.resume.constant.LinkedInApiConstant.SCOPE_DELIMITER;
 
-public class LinkedInApiScopesEncoder {
+class LinkedInApiScopesEncoder {
 
     public static String concatenatePermissionCodes(String firstCodes, String secondCodes) {
         return firstCodes.concat(SCOPE_DELIMITER).concat(secondCodes);

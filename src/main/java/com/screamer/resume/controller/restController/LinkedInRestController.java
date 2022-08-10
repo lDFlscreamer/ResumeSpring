@@ -1,4 +1,4 @@
-package com.screamer.resume.controller;
+package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.service.LinkedInApiUrlHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class LinkedInController {
+public class LinkedInRestController {
 
     @Autowired
     LinkedInApiUrlHandler linkedInApiUrlHandler;

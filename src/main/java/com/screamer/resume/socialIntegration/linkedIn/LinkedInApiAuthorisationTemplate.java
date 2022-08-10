@@ -1,7 +1,4 @@
-package com.screamer.resume.socialIntegration.linkedIn.ApiTemplate;
-
-import com.screamer.resume.socialIntegration.linkedIn.apiScopes.LinkedInApiScopes;
-import com.screamer.resume.socialIntegration.linkedIn.apiScopes.LinkedInApiScopesEncoder;
+package com.screamer.resume.socialIntegration.linkedIn;
 
 public class LinkedInApiAuthorisationTemplate extends LinkedInApiHttpTemplate {
 

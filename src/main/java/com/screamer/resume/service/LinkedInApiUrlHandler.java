@@ -1,6 +1,6 @@
 package com.screamer.resume.service;
 
-import com.screamer.resume.socialIntegration.linkedIn.ApiTemplate.LinkedInApiAuthorisationTemplate;
+import com.screamer.resume.socialIntegration.linkedIn.LinkedInApiAuthorisationTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +8,7 @@ import java.net.URI;
 
 import static com.screamer.resume.constant.LinkedInApiConstant.AUTHORISATION_REDIRECT_URL;
 import static com.screamer.resume.constant.LinkedInApiConstant.STATE;
-import static com.screamer.resume.socialIntegration.linkedIn.apiScopes.LinkedInApiScopes.NAME_AND_PHOTO;
+import static com.screamer.resume.socialIntegration.linkedIn.LinkedInApiScopes.NAME_AND_PHOTO;
 
 @Service
 public class LinkedInApiUrlHandler {

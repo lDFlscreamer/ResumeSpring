@@ -1,4 +1,4 @@
-package com.screamer.resume.socialIntegration.linkedIn.ApiTemplate;
+package com.screamer.resume.socialIntegration.linkedIn;
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;

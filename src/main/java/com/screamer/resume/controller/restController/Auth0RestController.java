@@ -1,4 +1,4 @@
-package com.screamer.resume.controller;
+package com.screamer.resume.controller.restController;
 
 
 import org.slf4j.Logger;
@@ -17,20 +17,18 @@ import java.util.Map;
  */
 // TODO: 28.07.2022 change realisation of auth0 methods
 @RestController
-public class AuthController {
-    Logger logger = LoggerFactory.getLogger(AuthController.class);
+public class Auth0RestController {
+    Logger logger = LoggerFactory.getLogger(Auth0RestController.class);
 
     /**
      * @param payload auth0 user profile
      * @return  registered user
-     * @throws Exception DB exception all another
      */
     // TODO: 28.07.2022 change auth0 signIn to true behavior and interaction with DB
     @PostMapping(
             value = "/user",
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Map<String, Object> signIn(@RequestBody Map<String, Object> payload)
-            throws Exception {
+    public Map<String, Object> signIn(@RequestBody Map<String, Object> payload) {
         logger.info(payload.toString());
         return payload;
     }
