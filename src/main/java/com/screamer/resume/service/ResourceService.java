@@ -9,6 +9,8 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Optional;
 
 
 @Service
@@ -18,26 +20,20 @@ public class ResourceService {
     private String javaCvRelatedPath;
 
     public Resource getJavaCV() {
-        try {
-            return getJavaCvResource();
-        } catch (FileNotFoundException | MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+        return getJavaCvResource();
     }
 
-    private Resource getJavaCvResource() throws FileNotFoundException, MalformedURLException {
-        File javaCV = getResourceFile(javaCvRelatedPath);
-        return getResource(javaCV);
+    private Resource getJavaCvResource() {
+        URL javCvUrl = getResourceURL(javaCvRelatedPath);
+        return getResource(javCvUrl);
     }
 
-    private Resource getResource(File file) throws MalformedURLException {
-        return new UrlResource(file.toPath().toUri());
+    private Resource getResource(URL resourceUrl) {
+        return new UrlResource(resourceUrl);
     }
 
-
-    private File getResourceFile(String resourcePathFromSourceRoot) throws FileNotFoundException {
-        return ResourceUtils.getFile("classpath:".concat(resourcePathFromSourceRoot));
+    private URL getResourceURL(String path){
+        return getClass().getResource(path);
     }
-
 
 }
