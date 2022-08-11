@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "resource")
-public class ResourceRestController {
+@RequestMapping(value = "resource/CV")
+public class ResourceCvRestController {
 
     final
     ResourceService resourceService;
 
-    public ResourceRestController(ResourceService resourceService) {
+    public ResourceCvRestController(ResourceService resourceService) {
         this.resourceService = resourceService;
     }
 
-    @GetMapping("/CV/Java")
+    @GetMapping("/Java")
     public ResponseEntity<?> getImageDynamicType() {
         Resource javaCV = resourceService.getJavaCV();
         return buildFileResponseFromResource(javaCV);
