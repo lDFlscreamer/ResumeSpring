@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.7.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>com.screamer</groupId>
     <artifactId>Resume</artifactId>
@@ -31,14 +31,13 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!--        Test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--		linkedIN-->
-
-        <!--		linkedIN-->
+        <!--        Test-->
         <!--		MongoDB-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
