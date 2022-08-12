@@ -21,7 +21,7 @@ public class ResourceCvRestController {
     }
 
     @GetMapping("/Java")
-    public ResponseEntity<?> getImageDynamicType() {
+    public ResponseEntity<?> getJavaCv() {
         Resource javaCV = resourceService.getJavaCV();
         return buildFileResponseFromResource(javaCV);
     }

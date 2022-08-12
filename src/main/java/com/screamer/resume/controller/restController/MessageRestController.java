@@ -33,14 +33,14 @@ public class MessageRestController {
     }
 
     @DeleteMapping(value = "/{id}")
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public void creteNewMessage(@PathVariable(name = "id") String id) {
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteMessageById(@PathVariable(name = "id") String id) {
         messageService.deleteMessage(id);
     }
 
     @DeleteMapping
-    @ResponseStatus(value = HttpStatus.CREATED)
-    public void creteNewMessage() {
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void deleteAllMessages() {
         messageService.deleteAllMessage();
     }
 }
