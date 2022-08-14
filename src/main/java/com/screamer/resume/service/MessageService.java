@@ -2,39 +2,21 @@ package com.screamer.resume.service;
 
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.entity.MessageDTO;
-import com.screamer.resume.repository.MessageRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class MessageService {
+public interface MessageService {
+    List<Message> getAllSavedMessages();
 
-    final
-    MessageRepository messageRepo;
+    List<Message> getAllUnreadMessage();
 
-    public MessageService(MessageRepository messageRepo) {
-        this.messageRepo = messageRepo;
-    }
+    Message saveNewMessage(Message m);
 
-    public List<Message> getAllSavedMessages() {
-        return messageRepo.findAll();
-    }
+    Message saveNewMessage(MessageDTO messageDTO);
 
-    public Message saveNewMessage(Message m) {
-        return messageRepo.save(m);
-    }
+    void deleteMessage(String messageId);
 
-    public Message saveNewMessage(MessageDTO messageDTO) {
-        Message messageFromDTO = new Message(messageDTO);
-        return saveNewMessage(messageFromDTO);
-    }
+    void deleteAllMessage();
 
-    public void deleteMessage(String messageId) {
-        messageRepo.deleteById(messageId);
-    }
-
-    public void deleteAllMessage() {
-        messageRepo.deleteAll();
-    }
+    Message updateMessage(Message message);
 }

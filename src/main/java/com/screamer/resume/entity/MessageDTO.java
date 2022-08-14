@@ -1,5 +1,7 @@
 package com.screamer.resume.entity;
 
+import java.util.Objects;
+
 public class MessageDTO {
     public String author;
     public String title;
@@ -47,4 +49,13 @@ public class MessageDTO {
                 .concat(", content='").concat(content).concat("'")
                 .concat("}");
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MessageDTO that = (MessageDTO) o;
+        return Objects.equals(author, that.author) && Objects.equals(title, that.title) && Objects.equals(content, that.content);
+    }
+
 }

@@ -6,19 +6,22 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.entity.MessageDTO;
-import org.junit.jupiter.api.Disabled;
+import com.screamer.resume.service.MessageService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.UUID;
 
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -28,39 +31,42 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class MessageRestControllerTest {
 
-
-    // TODO: 12.08.2022 Use embedded mongo DB
-
+    @MockBean
+    MessageService messageService;
     @Autowired
     private MockMvc mockMvc;
-
+    private final MediaType APPLICATION_JSON_UTF8 = new MediaType(
+            MediaType.APPLICATION_JSON.getType(),
+            MediaType.APPLICATION_JSON.getSubtype(),
+            StandardCharsets.UTF_8);
 
     @Test
-    @DisplayName("Get all message Test")
-    void getMessageEndpointTest() throws Exception {
+    @DisplayName("Get /message Test")
+    void getMessage() throws Exception {
+        when(messageService.getAllSavedMessages()).thenReturn(new ArrayList<>());
+
         this.mockMvc
                 .perform(get("/message"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-    }
 
+    }
 
     @Test
-    @DisplayName("Create and delete message tests")
-    @Transactional
-    void createAndDeleteMessage() throws Exception {
-        Message createdMessage = createMessage();
-        deleteMessageByIdEndpointTest(createdMessage.get_id());
+    @DisplayName("post /message tests")
+    void createNewMessage() throws Exception {
+        MessageDTO messageDTO = createTestMessageDTO();
+        Message message = new Message(messageDTO);
+        when(messageService.saveNewMessage(any(MessageDTO.class))).thenReturn(message);
+        String requestJson = convertMessageDtoToJSON(messageDTO);
 
-    }
-
-    private Message createMessage() throws Exception {
-        String requestJson = convertMessageDTOToJSON();
-        MvcResult mvcResult = createEndpointTest(requestJson);
-        String createdJson = mvcResult.getResponse().getContentAsString();
-        return convertJsonToMessage(createdJson);
-
+        this.mockMvc
+                .perform(post("/message")
+                        .contentType(APPLICATION_JSON_UTF8)
+                        .content(requestJson))
+                .andDo(print())
+                .andExpect(status().isCreated());
     }
 
     private MessageDTO createTestMessageDTO() {
@@ -71,37 +77,33 @@ class MessageRestControllerTest {
         return messageDTO;
     }
 
-    private String convertMessageDTOToJSON() throws JsonProcessingException {
-        MessageDTO messageDTO = createTestMessageDTO();
-
+    private String convertMessageDtoToJSON(MessageDTO messageDTO) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
         return ow.writeValueAsString(messageDTO);
-
     }
 
-    private Message convertJsonToMessage(String messageJSON) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        return mapper.readValue(messageJSON, Message.class);
-    }
+    @Test
+    @DisplayName("PUT /message/{id} test")
+    void updateMessage() throws Exception {
+        MessageDTO messageDTO = createTestMessageDTO();
+        Message message = new Message(messageDTO);
+        when(messageService.updateMessage(any(Message.class))).thenReturn(message);
+        String requestJson = convertMessageDtoToJSON(message);
 
-    private MvcResult createEndpointTest(String messageJson) throws Exception {
-        MediaType APPLICATION_JSON_UTF8 = new MediaType(
-                MediaType.APPLICATION_JSON.getType(),
-                MediaType.APPLICATION_JSON.getSubtype(),
-                StandardCharsets.UTF_8);
-
-        return this.mockMvc
-                .perform(post("/message")
+        this.mockMvc
+                .perform(put("/message")
                         .contentType(APPLICATION_JSON_UTF8)
-                        .content(messageJson))
-                .andExpect(status().isCreated())
-                .andReturn();
+                        .content(requestJson))
+                .andExpect(status().isCreated());
     }
 
-    private void deleteMessageByIdEndpointTest(String messageId) throws Exception {
+    @Test
+    @DisplayName("DELETE /message/{id} test")
+    void deleteMessageById() throws Exception {
+        String messageId = UUID.randomUUID().toString();
+
         this.mockMvc
                 .perform(delete("/message/".concat(messageId)))
                 .andDo(print())
@@ -110,8 +112,8 @@ class MessageRestControllerTest {
 
     @Test
     @DisplayName("Delete all message test")
-    @Disabled
-    void deleteAllMessagesEndpointTest() throws Exception {
+    void deleteAllMessages() throws Exception {
+
         this.mockMvc
                 .perform(delete("/message"))
                 .andDo(print())
