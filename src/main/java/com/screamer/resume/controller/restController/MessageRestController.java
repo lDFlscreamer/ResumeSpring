@@ -28,8 +28,14 @@ public class MessageRestController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Message creteNewMessage(@RequestBody MessageDTO message) {
+    public Message createNewMessage(@RequestBody MessageDTO message) {
         return messageService.saveNewMessage(message);
+    }
+
+    @PutMapping
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public Message updateMessage(@RequestBody Message message) {
+        return messageService.updateMessage(message);
     }
 
     @DeleteMapping(value = "/{id}")

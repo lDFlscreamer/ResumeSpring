@@ -1,6 +1,7 @@
 package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.service.ResourceService;
+import com.screamer.resume.service.ResourceServiceImpl;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,7 +17,7 @@ public class ResourceCvRestController {
     final
     ResourceService resourceService;
 
-    public ResourceCvRestController(ResourceService resourceService) {
+    public ResourceCvRestController(ResourceServiceImpl resourceService) {
         this.resourceService = resourceService;
     }
 
