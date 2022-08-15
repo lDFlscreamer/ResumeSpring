@@ -71,9 +71,9 @@ class MessageRestControllerTest {
 
     private MessageDTO createTestMessageDTO() {
         MessageDTO messageDTO = new MessageDTO();
-        messageDTO.author = "authorTest";
-        messageDTO.title = "titleTest";
-        messageDTO.content = "contentTest";
+        messageDTO.setAuthor("authorTest");
+        messageDTO.setTitle("titleTest");
+        messageDTO.setContent("contentTest");
         return messageDTO;
     }
 

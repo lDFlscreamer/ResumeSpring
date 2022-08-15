@@ -3,9 +3,9 @@ package com.screamer.resume.entity;
 import java.util.Objects;
 
 public class MessageDTO {
-    public String author;
-    public String title;
-    public String content;
+    protected String author;
+    protected String title;
+    protected String content;
 
     public MessageDTO() {
     }

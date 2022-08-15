@@ -2,16 +2,18 @@ package com.screamer.resume.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
 import java.util.UUID;
 
+@Document
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Message extends MessageDTO {
     @Id
-    public String _id;
-    public long timestamp;
-    public boolean read;
+    private String _id;
+    private long timestamp;
+    private boolean read;
 
     public Message() {
         super();
