@@ -27,7 +27,7 @@ public class SecurityConfig  {
     public DefaultSecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .mvcMatchers("/api/v1/resource/CV/**").permitAll()
-//                .mvcMatchers(apiPrefix.concat("/message/**")).authenticated()
+                .mvcMatchers(apiPrefix.concat("/message/**")).authenticated()
 //                .mvcMatchers("/api/private/scoped/**").hasAuthority("SCOPE_read:messages")
                 .anyRequest().permitAll()
                 .and().cors()
