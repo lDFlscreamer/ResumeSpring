@@ -5,8 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.entity.MessageDTO;
-import com.screamer.resume.service.MessageService;
+import com.screamer.resume.service.message.MessageDbService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -32,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MessageRestControllerTest {
 
     @MockBean
-    MessageService messageService;
+    MessageDbService messageDbService;
     @Autowired
     private MockMvc mockMvc;
     private final MediaType APPLICATION_JSON_UTF8 = new MediaType(
@@ -42,61 +40,57 @@ class MessageRestControllerTest {
 
     @Test
     @DisplayName("Get /message Test")
-    void getMessage() throws Exception {
-        when(messageService.getAllSavedMessages()).thenReturn(new ArrayList<>());
+    void getAllMessage() throws Exception {
+        when(messageDbService.getAllSavedMessages()).thenReturn(new ArrayList<>());
 
         this.mockMvc
                 .perform(get("/message"))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
     @DisplayName("post /message tests")
     void createNewMessage() throws Exception {
-        MessageDTO messageDTO = createTestMessageDTO();
-        Message message = new Message(messageDTO);
-        when(messageService.saveNewMessage(any(MessageDTO.class))).thenReturn(message);
-        String requestJson = convertMessageDtoToJSON(messageDTO);
+        Message message = createTestMessage();
+        when(messageDbService.saveNewMessage(any(Message.class))).thenReturn(message);
+        String requestJson = convertMessageDtoToJSON(message);
 
         this.mockMvc
                 .perform(post("/message")
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(requestJson))
                 .andDo(print())
-                .andExpect(status().isCreated());
+                .andExpect(status().isUnauthorized());
     }
 
-    private MessageDTO createTestMessageDTO() {
-        MessageDTO messageDTO = new MessageDTO();
-        messageDTO.author = "authorTest";
-        messageDTO.title = "titleTest";
-        messageDTO.content = "contentTest";
-        return messageDTO;
+    private Message createTestMessage() {
+        Message message = new Message();
+        message.setAuthor("authorTest");
+        message.setTitle("titleTest");
+        message.setContent("contentTest");
+        return message;
     }
 
-    private String convertMessageDtoToJSON(MessageDTO messageDTO) throws JsonProcessingException {
+    private String convertMessageDtoToJSON(Message message) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        return ow.writeValueAsString(messageDTO);
+        return ow.writeValueAsString(message);
     }
 
     @Test
     @DisplayName("PUT /message/{id} test")
     void updateMessage() throws Exception {
-        MessageDTO messageDTO = createTestMessageDTO();
-        Message message = new Message(messageDTO);
-        when(messageService.updateMessage(any(Message.class))).thenReturn(message);
+        Message message = createTestMessage();
+        when(messageDbService.updateMessage(any(Message.class))).thenReturn(message);
         String requestJson = convertMessageDtoToJSON(message);
 
         this.mockMvc
                 .perform(put("/message")
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(requestJson))
-                .andExpect(status().isCreated());
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
@@ -107,7 +101,7 @@ class MessageRestControllerTest {
         this.mockMvc
                 .perform(delete("/message/".concat(messageId)))
                 .andDo(print())
-                .andExpect(status().isNoContent());
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
@@ -117,6 +111,7 @@ class MessageRestControllerTest {
         this.mockMvc
                 .perform(delete("/message"))
                 .andDo(print())
-                .andExpect(status().isNoContent());
+                .andExpect(status().isUnauthorized());
     }
+
 }

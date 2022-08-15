@@ -1,4 +1,4 @@
-package com.screamer.resume.service;
+package com.screamer.resume.service.resource;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;

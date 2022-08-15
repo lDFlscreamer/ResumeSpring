@@ -1,6 +1,6 @@
 package com.screamer.resume.config;
 
-import com.screamer.resume.security.AudienceValidator;
+import com.screamer.resume.utils.validator.AudienceValidator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
