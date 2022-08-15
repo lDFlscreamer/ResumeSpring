@@ -18,21 +18,21 @@ public class SecurityConfig  {
     @Value("${auth0.audience}")
     private String audience;
 
-    @Value("${server.servlet.context-path}")
-    private String apiPrefix;
     @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
     private String issuer;
 
     @Bean
     public DefaultSecurityFilterChain configure(HttpSecurity http) throws Exception {
-        System.out.println("apiPrefix = " + apiPrefix);
-        http.authorizeRequests()
-                .mvcMatchers(apiPrefix.concat("/resource/CV/**")).permitAll()
-                .mvcMatchers(apiPrefix.concat("/message/**")).authenticated()
+        http
+                .authorizeRequests()
+                    .mvcMatchers("/resource/CV/**")
+                        .permitAll()
 //                .mvcMatchers("/api/private/scoped/**").hasAuthority("SCOPE_read:messages")
-//                .anyRequest().permitAll()
-                .and().cors()
-                .and().oauth2ResourceServer().jwt();
+                .anyRequest().authenticated()
+                .and()
+                    .cors()
+                .and()
+                    .oauth2ResourceServer().jwt();
         http.csrf().disable();
         return http.build();
     }
