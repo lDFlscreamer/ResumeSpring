@@ -1,18 +1,20 @@
 package com.screamer.resume.service.message;
 
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.entity.MessageDTO;
 
 import java.util.List;
 
 public interface MessageDbService {
     List<Message> getAllSavedMessages();
 
+    List<Message> getAllSavedMessages(String author);
+
     List<Message> getAllUnreadMessage();
+
+    List<Message> getAllUnreadMessage(String author);
 
     Message saveNewMessage(Message m);
 
-    Message saveNewMessage(MessageDTO messageDTO);
 
     void deleteMessage(String messageId);
 

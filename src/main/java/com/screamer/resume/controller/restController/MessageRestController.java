@@ -1,11 +1,8 @@
 package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.entity.MessageDTO;
 import com.screamer.resume.service.message.MessageDbService;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,13 +21,13 @@ public class MessageRestController {
 
     @GetMapping
     @ResponseStatus(value = HttpStatus.OK)
-    public List<Message> getMessage() {
+    public List<Message> getAllMessage() {
         return messageDbService.getAllSavedMessages();
     }
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Message createNewMessage(@RequestBody MessageDTO message) {
+    public Message createNewMessage(@RequestBody Message message) {
         return messageDbService.saveNewMessage(message);
     }
 
@@ -52,14 +49,4 @@ public class MessageRestController {
         messageDbService.deleteAllMessage();
     }
 
-
-    public static String getToken() {
-        String token = null;
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null) {
-            token =  authentication.getDetails().toString();
-        }
-        return token;
-    }
 }

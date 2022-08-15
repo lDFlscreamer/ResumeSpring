@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.entity.MessageDTO;
 import com.screamer.resume.service.message.MessageDbService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ class MessageRestControllerTest {
 
     @Test
     @DisplayName("Get /message Test")
-    void getMessage() throws Exception {
+    void getAllMessage() throws Exception {
         when(messageDbService.getAllSavedMessages()).thenReturn(new ArrayList<>());
 
         this.mockMvc
@@ -53,10 +52,9 @@ class MessageRestControllerTest {
     @Test
     @DisplayName("post /message tests")
     void createNewMessage() throws Exception {
-        MessageDTO messageDTO = createTestMessageDTO();
-        Message message = new Message(messageDTO);
-        when(messageDbService.saveNewMessage(any(MessageDTO.class))).thenReturn(message);
-        String requestJson = convertMessageDtoToJSON(messageDTO);
+        Message message = createTestMessage();
+        when(messageDbService.saveNewMessage(any(Message.class))).thenReturn(message);
+        String requestJson = convertMessageDtoToJSON(message);
 
         this.mockMvc
                 .perform(post("/message")
@@ -66,26 +64,25 @@ class MessageRestControllerTest {
                 .andExpect(status().isUnauthorized());
     }
 
-    private MessageDTO createTestMessageDTO() {
-        MessageDTO messageDTO = new MessageDTO();
-        messageDTO.setAuthor("authorTest");
-        messageDTO.setTitle("titleTest");
-        messageDTO.setContent("contentTest");
-        return messageDTO;
+    private Message createTestMessage() {
+        Message message = new Message();
+        message.setAuthor("authorTest");
+        message.setTitle("titleTest");
+        message.setContent("contentTest");
+        return message;
     }
 
-    private String convertMessageDtoToJSON(MessageDTO messageDTO) throws JsonProcessingException {
+    private String convertMessageDtoToJSON(Message message) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
         ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        return ow.writeValueAsString(messageDTO);
+        return ow.writeValueAsString(message);
     }
 
     @Test
     @DisplayName("PUT /message/{id} test")
     void updateMessage() throws Exception {
-        MessageDTO messageDTO = createTestMessageDTO();
-        Message message = new Message(messageDTO);
+        Message message = createTestMessage();
         when(messageDbService.updateMessage(any(Message.class))).thenReturn(message);
         String requestJson = convertMessageDtoToJSON(message);
 
@@ -116,4 +113,5 @@ class MessageRestControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
     }
+
 }

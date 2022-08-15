@@ -1,7 +1,6 @@
-package com.screamer.resume.service;
+package com.screamer.resume.service.message;
 
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.entity.MessageDTO;
 import com.screamer.resume.repository.MessageRepository;
 import com.screamer.resume.service.message.MessageDbServiceImpl;
 import org.junit.jupiter.api.DisplayName;
@@ -42,6 +41,21 @@ class MessageDbServiceImplTest {
     }
 
     @Test
+    @DisplayName("Test method to get all messages of specific author")
+    void testGetAllSavedMessages() {
+        List<Message> messageList = new ArrayList<>();
+        messageList.add(mock(Message.class));
+        messageList.add(mock(Message.class));
+        String author="author";
+        when(messageRepository.findAllByAuthor(author)).thenReturn(messageList);
+
+        List<Message> allUnreadMessage = messageService.getAllSavedMessages(author);
+
+        assertEquals(allUnreadMessage.size(), messageList.size(), "Unread message list size was changed");
+        assertEquals(allUnreadMessage, messageList);
+    }
+
+    @Test
     @DisplayName("Test method to get all unread messages")
     void getAllUnreadMessage() {
         List<Message> messageList = new ArrayList<>();
@@ -50,6 +64,21 @@ class MessageDbServiceImplTest {
         when(messageRepository.findAllByReadIsFalse()).thenReturn(messageList);
 
         List<Message> allUnreadMessage = messageService.getAllUnreadMessage();
+
+        assertEquals(allUnreadMessage.size(), messageList.size(), "Unread message list size was changed");
+        assertEquals(allUnreadMessage, messageList);
+    }
+
+    @Test
+    @DisplayName("Test method to get all unread messages of specific author")
+    void testGetAllUnreadMessage() {
+        List<Message> messageList = new ArrayList<>();
+        messageList.add(mock(Message.class));
+        messageList.add(mock(Message.class));
+        String author="author";
+        when(messageRepository.findAllByAuthorAndReadIsFalse(author)).thenReturn(messageList);
+
+        List<Message> allUnreadMessage = messageService.getAllUnreadMessage(author);
 
         assertEquals(allUnreadMessage.size(), messageList.size(), "Unread message list size was changed");
         assertEquals(allUnreadMessage, messageList);
@@ -66,18 +95,6 @@ class MessageDbServiceImplTest {
         assertEquals(mockMessage, savedMessage);
     }
 
-
-    @Test
-    @DisplayName("Test method to save message by pass messageDTO")
-    void testSaveNewMessage() {
-        MessageDTO mockMessageDto = mock(MessageDTO.class);
-        Message mockMessage = new Message(mockMessageDto);
-        when(messageRepository.save(mockMessage)).thenReturn(mockMessage);
-
-        Message savedMessage = messageService.saveNewMessage(mockMessageDto);
-
-        assertEquals(mockMessage, savedMessage);
-    }
 
     @Test
     @DisplayName("Test method to update message")
@@ -103,5 +120,4 @@ class MessageDbServiceImplTest {
     void deleteAllMessage() {
         messageService.deleteAllMessage();
     }
-
 }

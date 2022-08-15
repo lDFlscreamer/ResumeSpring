@@ -1,7 +1,6 @@
 package com.screamer.resume.service.message;
 
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.entity.MessageDTO;
 import com.screamer.resume.repository.MessageRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,19 +22,23 @@ public class MessageDbServiceImpl implements MessageDbService {
     }
 
     @Override
+    public List<Message> getAllSavedMessages(String author) {
+        return messageRepo.findAllByAuthor(author);
+    }
+
+    @Override
     public List<Message> getAllUnreadMessage(){
         return messageRepo.findAllByReadIsFalse();
     }
 
     @Override
-    public Message saveNewMessage(Message m) {
-        return messageRepo.save(m);
+    public List<Message> getAllUnreadMessage(String author){
+        return messageRepo.findAllByAuthorAndReadIsFalse(author);
     }
 
     @Override
-    public Message saveNewMessage(MessageDTO messageDTO) {
-        Message messageFromDTO = new Message(messageDTO);
-        return saveNewMessage(messageFromDTO);
+    public Message saveNewMessage(Message m) {
+        return messageRepo.save(m);
     }
 
     @Override
