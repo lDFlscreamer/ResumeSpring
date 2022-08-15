@@ -30,7 +30,7 @@ public class SecurityConfig  {
                 .mvcMatchers(apiPrefix.concat("/resource/CV/**")).permitAll()
                 .mvcMatchers(apiPrefix.concat("/message/**")).authenticated()
 //                .mvcMatchers("/api/private/scoped/**").hasAuthority("SCOPE_read:messages")
-                .anyRequest().permitAll()
+//                .anyRequest().permitAll()
                 .and().cors()
                 .and().oauth2ResourceServer().jwt();
         http.csrf().disable();
