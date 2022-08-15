@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.entity.MessageDTO;
-import com.screamer.resume.service.MessageService;
+import com.screamer.resume.service.message.MessageDbService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -32,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class MessageRestControllerTest {
 
     @MockBean
-    MessageService messageService;
+    MessageDbService messageDbService;
     @Autowired
     private MockMvc mockMvc;
     private final MediaType APPLICATION_JSON_UTF8 = new MediaType(
@@ -43,14 +42,12 @@ class MessageRestControllerTest {
     @Test
     @DisplayName("Get /message Test")
     void getMessage() throws Exception {
-        when(messageService.getAllSavedMessages()).thenReturn(new ArrayList<>());
+        when(messageDbService.getAllSavedMessages()).thenReturn(new ArrayList<>());
 
         this.mockMvc
                 .perform(get("/message"))
                 .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON));
-
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
@@ -58,7 +55,7 @@ class MessageRestControllerTest {
     void createNewMessage() throws Exception {
         MessageDTO messageDTO = createTestMessageDTO();
         Message message = new Message(messageDTO);
-        when(messageService.saveNewMessage(any(MessageDTO.class))).thenReturn(message);
+        when(messageDbService.saveNewMessage(any(MessageDTO.class))).thenReturn(message);
         String requestJson = convertMessageDtoToJSON(messageDTO);
 
         this.mockMvc
@@ -66,7 +63,7 @@ class MessageRestControllerTest {
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(requestJson))
                 .andDo(print())
-                .andExpect(status().isCreated());
+                .andExpect(status().isUnauthorized());
     }
 
     private MessageDTO createTestMessageDTO() {
@@ -89,14 +86,14 @@ class MessageRestControllerTest {
     void updateMessage() throws Exception {
         MessageDTO messageDTO = createTestMessageDTO();
         Message message = new Message(messageDTO);
-        when(messageService.updateMessage(any(Message.class))).thenReturn(message);
+        when(messageDbService.updateMessage(any(Message.class))).thenReturn(message);
         String requestJson = convertMessageDtoToJSON(message);
 
         this.mockMvc
                 .perform(put("/message")
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(requestJson))
-                .andExpect(status().isCreated());
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
@@ -107,7 +104,7 @@ class MessageRestControllerTest {
         this.mockMvc
                 .perform(delete("/message/".concat(messageId)))
                 .andDo(print())
-                .andExpect(status().isNoContent());
+                .andExpect(status().isUnauthorized());
     }
 
     @Test
@@ -117,6 +114,6 @@ class MessageRestControllerTest {
         this.mockMvc
                 .perform(delete("/message"))
                 .andDo(print())
-                .andExpect(status().isNoContent());
+                .andExpect(status().isUnauthorized());
     }
 }

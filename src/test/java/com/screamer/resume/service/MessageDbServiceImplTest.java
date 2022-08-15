@@ -3,6 +3,7 @@ package com.screamer.resume.service;
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.entity.MessageDTO;
 import com.screamer.resume.repository.MessageRepository;
+import com.screamer.resume.service.message.MessageDbServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,13 +19,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(SpringExtension.class)
-class MessageServiceImplTest {
+class MessageDbServiceImplTest {
 
     @Mock
     MessageRepository messageRepository;
 
     @InjectMocks
-    MessageServiceImpl messageService;
+    MessageDbServiceImpl messageService;
 
     @Test
     @DisplayName("Test method to get all messages")

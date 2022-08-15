@@ -1,4 +1,4 @@
-package com.screamer.resume.service;
+package com.screamer.resume.service.message;
 
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.entity.MessageDTO;
@@ -8,12 +8,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MessageServiceImpl implements MessageService {
+public class MessageDbServiceImpl implements MessageDbService {
 
     final
     MessageRepository messageRepo;
 
-    public MessageServiceImpl(MessageRepository messageRepo) {
+    public MessageDbServiceImpl(MessageRepository messageRepo) {
         this.messageRepo = messageRepo;
     }
 

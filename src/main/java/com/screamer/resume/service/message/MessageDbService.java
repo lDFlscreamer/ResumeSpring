@@ -1,11 +1,11 @@
-package com.screamer.resume.service;
+package com.screamer.resume.service.message;
 
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.entity.MessageDTO;
 
 import java.util.List;
 
-public interface MessageService {
+public interface MessageDbService {
     List<Message> getAllSavedMessages();
 
     List<Message> getAllUnreadMessage();
