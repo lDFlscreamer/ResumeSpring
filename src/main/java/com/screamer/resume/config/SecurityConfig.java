@@ -23,13 +23,16 @@ public class SecurityConfig  {
 
     @Bean
     public DefaultSecurityFilterChain configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .mvcMatchers("/api/public/**").permitAll()
-                .mvcMatchers("/api/private/**").authenticated()
+        http
+                .authorizeRequests()
+                    .mvcMatchers("/resource/CV/**")
+                        .permitAll()
 //                .mvcMatchers("/api/private/scoped/**").hasAuthority("SCOPE_read:messages")
-                .anyRequest().permitAll()
-                .and().cors()
-                .and().oauth2ResourceServer().jwt();
+                .anyRequest().authenticated()
+                .and()
+                    .cors()
+                .and()
+                    .oauth2ResourceServer().jwt();
         http.csrf().disable();
         return http.build();
     }
