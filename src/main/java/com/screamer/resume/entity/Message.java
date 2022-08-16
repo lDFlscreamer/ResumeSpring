@@ -14,12 +14,15 @@ import java.util.UUID;
 public class Message {
     @Id
     private String _id;
-    private String author;
+    private String authorId;
+    private String authorName;
+
     private String title;
     private String content;
     @DBRef
     private Answer answer;
     private boolean read;
+
 
     private long timestamp;
 
@@ -38,12 +41,20 @@ public class Message {
         this._id = _id;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public String getTitle() {
@@ -97,6 +108,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{".concat("id='").concat(_id).concat("'").concat(", author='").concat(author).concat("'").concat(", title='").concat(title).concat("'").concat(", content='").concat(content).concat("'").concat("isRead=").concat(read ? "yes" : "No").concat("'").concat("}");
+        return "Message{".concat("id='").concat(_id).concat("'").concat(", author='").concat(authorName).concat("'").concat(", title='").concat(title).concat("'").concat(", content='").concat(content).concat("'").concat("isRead=").concat(read ? "yes" : "No").concat("'").concat("}");
     }
 }

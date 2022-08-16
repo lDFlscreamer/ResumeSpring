@@ -14,6 +14,7 @@ public interface MessageDbService {
     List<Message> getAllUnreadMessage(String author);
 
     Message saveNewMessage(Message m);
+    Message saveNewMessage(String authorId, Message m);
 
 
     void deleteMessage(String messageId);

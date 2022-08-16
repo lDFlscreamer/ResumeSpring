@@ -23,7 +23,7 @@ public class MessageDbServiceImpl implements MessageDbService {
 
     @Override
     public List<Message> getAllSavedMessages(String author) {
-        return messageRepo.findAllByAuthor(author);
+        return messageRepo.findAllByAuthorId(author);
     }
 
     @Override
@@ -33,12 +33,18 @@ public class MessageDbServiceImpl implements MessageDbService {
 
     @Override
     public List<Message> getAllUnreadMessage(String author){
-        return messageRepo.findAllByAuthorAndReadIsFalse(author);
+        return messageRepo.findAllByAuthorIdAndReadIsFalse(author);
     }
 
     @Override
     public Message saveNewMessage(Message m) {
         return messageRepo.save(m);
+    }
+
+    @Override
+    public Message saveNewMessage(String authorId,Message m) {
+        m.setAuthorId(authorId);
+        return saveNewMessage(m);
     }
 
     @Override
