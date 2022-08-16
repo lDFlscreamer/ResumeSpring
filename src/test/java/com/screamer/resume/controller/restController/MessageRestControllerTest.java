@@ -66,7 +66,7 @@ class MessageRestControllerTest {
 
     private Message createTestMessage() {
         Message message = new Message();
-        message.setAuthor("authorTest");
+        message.setAuthorName("authorTest");
         message.setTitle("titleTest");
         message.setContent("contentTest");
         return message;

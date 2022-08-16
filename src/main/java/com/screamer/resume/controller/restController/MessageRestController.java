@@ -3,6 +3,7 @@ package com.screamer.resume.controller.restController;
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.service.message.MessageDbService;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +28,8 @@ public class MessageRestController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    public Message createNewMessage(@RequestBody Message message) {
-        return messageDbService.saveNewMessage(message);
+    public Message createNewMessage(Authentication authentication, @RequestBody Message message) {
+        return messageDbService.saveNewMessage(authentication.getName(), message);
     }
 
     @PutMapping

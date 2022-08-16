@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -47,7 +48,7 @@ class MessageDbServiceImplTest {
         messageList.add(mock(Message.class));
         messageList.add(mock(Message.class));
         String author="author";
-        when(messageRepository.findAllByAuthor(author)).thenReturn(messageList);
+        when(messageRepository.findAllByAuthorId(author)).thenReturn(messageList);
 
         List<Message> allUnreadMessage = messageService.getAllSavedMessages(author);
 
@@ -76,7 +77,7 @@ class MessageDbServiceImplTest {
         messageList.add(mock(Message.class));
         messageList.add(mock(Message.class));
         String author="author";
-        when(messageRepository.findAllByAuthorAndReadIsFalse(author)).thenReturn(messageList);
+        when(messageRepository.findAllByAuthorIdAndReadIsFalse(author)).thenReturn(messageList);
 
         List<Message> allUnreadMessage = messageService.getAllUnreadMessage(author);
 
@@ -95,6 +96,17 @@ class MessageDbServiceImplTest {
         assertEquals(mockMessage, savedMessage);
     }
 
+    @Test
+    @DisplayName("Test method to save message with authorId")
+    void testSaveNewMessage() {
+        Message mockMessage = mock(Message.class);
+        String authorId= UUID.randomUUID().toString();
+        when(messageRepository.save(mockMessage)).thenReturn(mockMessage);
+
+        Message savedMessage = messageService.saveNewMessage(authorId,mockMessage);
+
+        assertEquals(mockMessage, savedMessage);
+    }
 
     @Test
     @DisplayName("Test method to update message")
@@ -120,4 +132,5 @@ class MessageDbServiceImplTest {
     void deleteAllMessage() {
         messageService.deleteAllMessage();
     }
+
 }

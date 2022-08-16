@@ -3,6 +3,7 @@ package com.screamer.resume.config;
 import com.screamer.resume.utils.validator.AudienceValidator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
@@ -27,7 +28,6 @@ public class SecurityConfig  {
                 .authorizeRequests()
                     .mvcMatchers("/resource/CV/**")
                         .permitAll()
-//                .mvcMatchers("/api/private/scoped/**").hasAuthority("SCOPE_read:messages")
                 .anyRequest().authenticated()
                 .and()
                     .cors()
