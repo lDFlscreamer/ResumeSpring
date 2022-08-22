@@ -61,7 +61,7 @@ class MessageRestControllerTest {
                         .contentType(APPLICATION_JSON_UTF8)
                         .content(requestJson))
                 .andDo(print())
-                .andExpect(status().isUnauthorized());
+                .andExpect(status().isCreated());
     }
 
     private Message createTestMessage() {
