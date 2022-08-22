@@ -28,6 +28,8 @@ public class SecurityConfig  {
                 .authorizeRequests()
                     .mvcMatchers("/resource/CV/**")
                         .permitAll()
+                    .mvcMatchers(HttpMethod.POST,"/message")
+                        .permitAll()
                 .anyRequest().authenticated()
                 .and()
                     .cors()

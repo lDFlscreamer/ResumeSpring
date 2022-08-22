@@ -29,6 +29,9 @@ public class MessageRestController {
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public Message createNewMessage(Authentication authentication, @RequestBody Message message) {
+        if (authentication == null) {
+            return messageDbService.saveNewMessage(message);
+        }
         return messageDbService.saveNewMessage(authentication.getName(), message);
     }
 
