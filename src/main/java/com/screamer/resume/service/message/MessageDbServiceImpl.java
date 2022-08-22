@@ -37,6 +37,11 @@ public class MessageDbServiceImpl implements MessageDbService {
     }
 
     @Override
+    public List<Message> getPublicMessage() {
+        return messageRepo.findAllByDirectIsFalse();
+    }
+
+    @Override
     public Message saveNewMessage(Message m) {
         return messageRepo.save(m);
     }

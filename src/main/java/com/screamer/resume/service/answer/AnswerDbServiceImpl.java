@@ -1,4 +1,4 @@
-package com.screamer.resume.service.message;
+package com.screamer.resume.service.answer;
 
 import com.screamer.resume.entity.Answer;
 import com.screamer.resume.entity.Message;

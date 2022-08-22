@@ -4,14 +4,7 @@ import com.screamer.resume.entity.Message;
 
 import java.util.List;
 
-public interface MessageDbService {
-    List<Message> getAllSavedMessages();
-
-    List<Message> getAllSavedMessages(String author);
-
-    List<Message> getAllUnreadMessage();
-
-    List<Message> getAllUnreadMessage(String author);
+public interface MessageDbService extends MessageDbGetService {
 
     Message saveNewMessage(Message m);
     Message saveNewMessage(String authorId, Message m);

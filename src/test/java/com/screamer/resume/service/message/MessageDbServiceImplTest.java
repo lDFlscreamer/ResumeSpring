@@ -86,6 +86,19 @@ class MessageDbServiceImplTest {
     }
 
     @Test
+    void getPublicMessage() {
+        List<Message> messageList = new ArrayList<>();
+        messageList.add(mock(Message.class));
+        messageList.add(mock(Message.class));
+        when(messageRepository.findAllByDirectIsFalse()).thenReturn(messageList);
+
+        List<Message> allUnreadMessage = messageService.getPublicMessage();
+
+        assertEquals(allUnreadMessage.size(), messageList.size(), "public message list size was changed");
+        assertEquals(allUnreadMessage, messageList);
+    }
+
+    @Test
     @DisplayName("Test method to save message")
     void saveNewMessage() {
         Message mockMessage = mock(Message.class);
@@ -132,5 +145,6 @@ class MessageDbServiceImplTest {
     void deleteAllMessage() {
         messageService.deleteAllMessage();
     }
+
 
 }

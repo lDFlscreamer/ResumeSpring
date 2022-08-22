@@ -1,7 +1,7 @@
 package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.service.message.AnswerDbService;
+import com.screamer.resume.service.answer.AnswerDbService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

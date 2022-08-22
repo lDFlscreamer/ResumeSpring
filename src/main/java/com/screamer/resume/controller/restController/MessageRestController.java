@@ -26,9 +26,18 @@ public class MessageRestController {
         return messageDbService.getAllSavedMessages();
     }
 
+    @GetMapping("/public")
+    @ResponseStatus(value = HttpStatus.OK)
+    public List<Message> getPublicMessage() {
+        return messageDbService.getPublicMessage();
+    }
+
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
     public Message createNewMessage(Authentication authentication, @RequestBody Message message) {
+        if (authentication == null) {
+            return messageDbService.saveNewMessage(message);
+        }
         return messageDbService.saveNewMessage(authentication.getName(), message);
     }
 
