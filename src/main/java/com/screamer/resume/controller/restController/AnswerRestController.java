@@ -3,7 +3,7 @@ package com.screamer.resume.controller.restController;
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.exceptions.MessageNotFoundException;
 import com.screamer.resume.exceptions.MessageUnansweredException;
-import com.screamer.resume.service.message.AnswerDbService;
+import com.screamer.resume.service.answer.AnswerDbService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
