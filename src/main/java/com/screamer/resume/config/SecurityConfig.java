@@ -30,7 +30,10 @@ public class SecurityConfig  {
                         .permitAll()
                     .mvcMatchers(HttpMethod.POST,"/message")
                         .permitAll()
+                    .mvcMatchers(HttpMethod.GET,"/message/public")
+                        .permitAll()
                 .anyRequest().authenticated()
+
                 .and()
                     .cors()
                 .and()

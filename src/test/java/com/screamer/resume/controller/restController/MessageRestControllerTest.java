@@ -48,7 +48,16 @@ class MessageRestControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
     }
+    @Test
+    @DisplayName("Get /message/public Test")
+    void getPublicMessage() throws Exception {
+        when(messageDbService.getAllSavedMessages()).thenReturn(new ArrayList<>());
 
+        this.mockMvc
+                .perform(get("/message/public"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
     @Test
     @DisplayName("post /message tests")
     void createNewMessage() throws Exception {

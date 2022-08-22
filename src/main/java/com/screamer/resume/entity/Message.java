@@ -22,8 +22,7 @@ public class Message {
     @DBRef
     private Answer answer;
     private boolean read;
-
-
+    private boolean direct;
     private long timestamp;
 
     public Message() {
@@ -31,6 +30,7 @@ public class Message {
         this._id = UUID.randomUUID().toString();
         this.timestamp = Instant.now().getEpochSecond();
         this.read = false;
+        this.direct = false;
     }
 
     public String get_id() {
@@ -87,6 +87,14 @@ public class Message {
 
     public void setRead(boolean read) {
         this.read = read;
+    }
+
+    public boolean isDirect() {
+        return direct;
+    }
+
+    public void setDirect(boolean direct) {
+        this.direct = direct;
     }
 
     public long getTimestamp() {
