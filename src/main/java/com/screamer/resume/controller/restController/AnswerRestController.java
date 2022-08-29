@@ -3,9 +3,10 @@ package com.screamer.resume.controller.restController;
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.exceptions.MessageNotFoundException;
 import com.screamer.resume.exceptions.MessageUnansweredException;
-import com.screamer.resume.service.answer.AnswerDbService;
+import com.screamer.resume.service.message.answer.AnswerDbService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 @RequestMapping("message")
@@ -35,11 +36,11 @@ public class AnswerRestController {
         try {
             return answerDbService.updateAnswer(messageId, answerText);
         } catch (MessageNotFoundException e) {
-            // TODO: 15.08.2022 Write exception for this business logic
-            throw new RuntimeException(e);
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Message Not Found", e);
         } catch (MessageUnansweredException e) {
-            // TODO: 15.08.2022 Write exception for this business logic
-            throw new RuntimeException(e);
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Answer Not Found", e);
         }
     }
 
