@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.service.message.MessageDbService;
+import com.screamer.resume.service.dbService.message.MessageDbService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,7 +75,7 @@ class MessageRestControllerTest {
 
     private Message createTestMessage() {
         Message message = new Message();
-        message.setAuthorName("authorTest");
+        message.setPublicAuthorName("authorTest");
         message.setTitle("titleTest");
         message.setContent("contentTest");
         return message;

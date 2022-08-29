@@ -1,6 +1,7 @@
 package com.screamer.resume.config;
 
 import com.screamer.resume.utils.listeners.MessageCascadeMongoEventListener;
+import com.screamer.resume.utils.listeners.UserCascadeMongoEventListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
@@ -17,6 +18,11 @@ public class MongoConfig {
     @Bean
     public MessageCascadeMongoEventListener messageCascadeSaveMongoEventListener() {
         return new MessageCascadeMongoEventListener();
+    }
+
+    @Bean
+    public UserCascadeMongoEventListener userCascadeSaveMongoEventListener() {
+        return new UserCascadeMongoEventListener();
     }
 
 }

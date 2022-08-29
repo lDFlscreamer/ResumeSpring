@@ -10,10 +10,9 @@ import java.util.List;
 public interface MessageRepository extends MongoRepository<Message, String> {
     List<Message> findAllByReadIsFalse();
 
-    List<Message> findAllByAuthorId(String authorId);
-    List<Message> findAllByAuthorIdAndReadIsFalse(String authorId);
-    List<Message> findAllByDirectIsFalse();
-    List<Message> findAllByDirectIsTrue();
-    List<Message> findAllByDirectIsFalseAndAuthorId(String authorId);
+    List<Message> findAllByAuthor_UserAuthId(String authorId);
 
+    List<Message> findAllByAuthor_UserAuthIdAndReadIsFalse(String authorId);
+
+    List<Message> findAllByDirectIsFalse();
 }

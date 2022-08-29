@@ -1,10 +1,8 @@
-package com.screamer.resume.service.message;
+package com.screamer.resume.service.dbService.message;
 
 import com.screamer.resume.entity.Message;
 
-import java.util.List;
-
-public interface MessageDbService extends MessageDbGetService {
+public interface MessageDbService extends MessageDbGetMethods {
 
     Message saveNewMessage(Message m);
     Message saveNewMessage(String authorId, Message m);
