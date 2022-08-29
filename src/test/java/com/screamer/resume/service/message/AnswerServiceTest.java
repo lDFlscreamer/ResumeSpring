@@ -2,10 +2,10 @@ package com.screamer.resume.service.message;
 
 import com.screamer.resume.entity.Answer;
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.exceptions.MessageNotFoundException;
-import com.screamer.resume.exceptions.MessageUnansweredException;
+import com.screamer.resume.exceptions.message.MessageNotFoundException;
+import com.screamer.resume.exceptions.message.MessageUnansweredException;
 import com.screamer.resume.repository.MessageRepository;
-import com.screamer.resume.service.answer.AnswerDbServiceImpl;
+import com.screamer.resume.service.answer.AnswerServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,13 +21,13 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith({SpringExtension.class})
-class AnswerDbServiceTest {
+class AnswerServiceTest {
 
     @Mock
     MessageRepository messageRepository;
 
     @InjectMocks
-    AnswerDbServiceImpl answerDbService;
+    AnswerServiceImpl answerDbService;
 
     @Test
     @DisplayName("Answer to message check")

@@ -14,9 +14,9 @@ import java.util.UUID;
 public class Message {
     @Id
     private String _id;
-    private String authorId;
-    private String authorName;
-
+    @DBRef
+    private User author;
+    private String publicAuthorName;
     private String title;
     private String content;
     @DBRef
@@ -26,7 +26,6 @@ public class Message {
     private long timestamp;
 
     public Message() {
-        super();
         this._id = UUID.randomUUID().toString();
         this.timestamp = Instant.now().getEpochSecond();
         this.read = false;
@@ -41,20 +40,20 @@ public class Message {
         this._id = _id;
     }
 
-    public String getAuthorId() {
-        return authorId;
+    public User getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
+    public void setAuthor(User author) {
+        this.author = author;
     }
 
-    public String getAuthorName() {
-        return authorName;
+    public String getPublicAuthorName() {
+        return publicAuthorName;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
+    public void setPublicAuthorName(String publicAuthorName) {
+        this.publicAuthorName = publicAuthorName;
     }
 
     public String getTitle() {
@@ -116,6 +115,12 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{".concat("id='").concat(_id).concat("'").concat(", author='").concat(authorName).concat("'").concat(", title='").concat(title).concat("'").concat(", content='").concat(content).concat("'").concat("isRead=").concat(read ? "yes" : "No").concat("'").concat("}");
+        return "Message{"
+                .concat("id='").concat(_id).concat("'")
+                .concat(", author='").concat(publicAuthorName).concat("'")
+                .concat(", title='").concat(title).concat("'")
+                .concat(", content='").concat(content).concat("'")
+                .concat("isRead=").concat(read ? "yes" : "No").concat("'")
+                .concat("}");
     }
 }

@@ -2,7 +2,7 @@ package com.screamer.resume.service.message;
 
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.repository.MessageRepository;
-import com.screamer.resume.service.message.MessageDbServiceImpl;
+import com.screamer.resume.service.dbService.message.MessageDbServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,8 +47,8 @@ class MessageDbServiceImplTest {
         List<Message> messageList = new ArrayList<>();
         messageList.add(mock(Message.class));
         messageList.add(mock(Message.class));
-        String author="author";
-        when(messageRepository.findAllByAuthorId(author)).thenReturn(messageList);
+        String author = "author";
+        when(messageRepository.findAllByAuthor_UserAuthId(author)).thenReturn(messageList);
 
         List<Message> allUnreadMessage = messageService.getAllSavedMessages(author);
 
@@ -76,8 +76,8 @@ class MessageDbServiceImplTest {
         List<Message> messageList = new ArrayList<>();
         messageList.add(mock(Message.class));
         messageList.add(mock(Message.class));
-        String author="author";
-        when(messageRepository.findAllByAuthorIdAndReadIsFalse(author)).thenReturn(messageList);
+        String author = "author";
+        when(messageRepository.findAllByAuthor_UserAuthIdAndReadIsFalse(author)).thenReturn(messageList);
 
         List<Message> allUnreadMessage = messageService.getAllUnreadMessage(author);
 

@@ -1,7 +1,7 @@
 package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.service.answer.AnswerDbService;
+import com.screamer.resume.service.answer.AnswerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class AnswerRestControllerTest {
 
     @MockBean
-    AnswerDbService answerDbService;
+    AnswerService answerService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -34,7 +34,7 @@ class AnswerRestControllerTest {
     void answerToMessage() throws Exception {
         Message message = mock(Message.class);
         String messageId = UUID.randomUUID().toString();
-        when(answerDbService.answerToMessage(anyString(), anyString())).thenReturn(message);
+        when(answerService.answerToMessage(anyString(), anyString())).thenReturn(message);
 
         this.mockMvc
                 .perform(post(String.format("/message/%s/Answer", messageId))
@@ -47,7 +47,7 @@ class AnswerRestControllerTest {
     void updateAnswer() throws Exception {
         Message message = mock(Message.class);
         String messageId = UUID.randomUUID().toString();
-        when(answerDbService.updateAnswer(anyString(), anyString())).thenReturn(message);
+        when(answerService.updateAnswer(anyString(), anyString())).thenReturn(message);
 
         this.mockMvc
                 .perform(put(String.format("/message/%s/Answer", messageId))

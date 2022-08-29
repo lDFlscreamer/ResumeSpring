@@ -26,8 +26,7 @@ public class MessageCascadeMongoEventListener extends AbstractMongoEventListener
     public void onBeforeDelete(BeforeDeleteEvent<Message> event) {
         Document source = event.getSource();
         Object sourceId = source.get("_id");
-        String collectionName = event.getCollectionName();
-        Message message = mongoOperations.findById(sourceId, Message.class, collectionName);
+        Message message = mongoOperations.findById(sourceId, Message.class);
         if (message != null) {
             Answer answer = message.getAnswer();
             if (answer != null) {
