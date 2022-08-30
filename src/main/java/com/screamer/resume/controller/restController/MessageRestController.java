@@ -1,7 +1,7 @@
 package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.service.message.MessageService;
+import com.screamer.resume.service.businessServices.message.MessageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;

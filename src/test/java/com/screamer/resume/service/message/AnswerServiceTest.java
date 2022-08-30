@@ -5,7 +5,7 @@ import com.screamer.resume.entity.Message;
 import com.screamer.resume.exceptions.message.MessageNotFoundException;
 import com.screamer.resume.exceptions.message.MessageUnansweredException;
 import com.screamer.resume.repository.MessageRepository;
-import com.screamer.resume.service.answer.AnswerServiceImpl;
+import com.screamer.resume.service.businessServices.answer.AnswerServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

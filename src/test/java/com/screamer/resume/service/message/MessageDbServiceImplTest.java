@@ -2,7 +2,7 @@ package com.screamer.resume.service.message;
 
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.repository.MessageRepository;
-import com.screamer.resume.service.dbService.message.MessageDbServiceImpl;
+import com.screamer.resume.service.dbServices.message.MessageDbServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package com.screamer.resume.service.dbService.user;
+package com.screamer.resume.service.dbServices.user;
 
 import com.screamer.resume.entity.User;
 import com.screamer.resume.exceptions.user.UserNotFoundException;

@@ -1,4 +1,4 @@
-package com.screamer.resume.service.dbService.message;
+package com.screamer.resume.service.dbServices.message;
 
 import com.screamer.resume.entity.Message;
 

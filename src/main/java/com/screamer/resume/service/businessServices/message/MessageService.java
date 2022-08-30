@@ -1,4 +1,4 @@
-package com.screamer.resume.service.message;
+package com.screamer.resume.service.businessServices.message;
 
 import com.screamer.resume.entity.Message;
 import org.springframework.security.core.Authentication;

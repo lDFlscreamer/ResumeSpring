@@ -1,4 +1,4 @@
-package com.screamer.resume.utils.validator;
+package com.screamer.resume.config.validator;
 
 import org.springframework.security.oauth2.core.OAuth2Error;
 import org.springframework.security.oauth2.core.OAuth2ErrorCodes;

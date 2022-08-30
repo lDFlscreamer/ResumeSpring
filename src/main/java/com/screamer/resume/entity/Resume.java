@@ -13,6 +13,7 @@ public class Resume {
     private String _id;
     private ResumeFileType resumeFileType;
     private String position;
+    private String resumeFileName;
     private Object resumeFile;
 
     public Resume() {
@@ -42,6 +43,14 @@ public class Resume {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public String getResumeFileName() {
+        return resumeFileName;
+    }
+
+    public void setResumeFileName(String resumeFileName) {
+        this.resumeFileName = resumeFileName;
     }
 
     public Object getResumeFile() {

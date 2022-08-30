@@ -10,5 +10,4 @@ public class ResumeApplication {
         SpringApplication.run(ResumeApplication.class, args);
     }
 
-
 }

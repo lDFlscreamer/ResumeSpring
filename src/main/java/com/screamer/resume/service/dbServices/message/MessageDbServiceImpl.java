@@ -1,10 +1,10 @@
-package com.screamer.resume.service.dbService.message;
+package com.screamer.resume.service.dbServices.message;
 
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.entity.User;
 import com.screamer.resume.exceptions.message.MessageNotFoundException;
 import com.screamer.resume.repository.MessageRepository;
-import com.screamer.resume.service.dbService.user.UserDbService;
+import com.screamer.resume.service.dbServices.user.UserDbService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,10 +1,10 @@
-package com.screamer.resume.service.answer;
+package com.screamer.resume.service.businessServices.answer;
 
 import com.screamer.resume.entity.Answer;
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.exceptions.message.MessageNotFoundException;
 import com.screamer.resume.exceptions.message.MessageUnansweredException;
-import com.screamer.resume.service.dbService.message.MessageDbService;
+import com.screamer.resume.service.dbServices.message.MessageDbService;
 import org.springframework.stereotype.Service;
 
 @Service

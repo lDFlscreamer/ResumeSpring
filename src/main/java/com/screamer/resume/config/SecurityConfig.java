@@ -1,6 +1,6 @@
 package com.screamer.resume.config;
 
-import com.screamer.resume.utils.validator.AudienceValidator;
+import com.screamer.resume.config.validator.AudienceValidator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
@@ -31,6 +31,8 @@ public class SecurityConfig  {
                     .mvcMatchers(HttpMethod.POST,"/message")
                         .permitAll()
                     .mvcMatchers(HttpMethod.GET,"/message/public")
+                        .permitAll()
+                    .mvcMatchers(HttpMethod.GET,"/resume/*")
                         .permitAll()
                 .anyRequest().authenticated()
 
