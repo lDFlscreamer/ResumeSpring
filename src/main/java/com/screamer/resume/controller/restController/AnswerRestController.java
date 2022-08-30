@@ -3,7 +3,7 @@ package com.screamer.resume.controller.restController;
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.exceptions.message.MessageNotFoundException;
 import com.screamer.resume.exceptions.message.MessageUnansweredException;
-import com.screamer.resume.service.answer.AnswerService;
+import com.screamer.resume.service.businessServices.answer.AnswerService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,7 +25,7 @@ public class AnswerRestController {
         try {
             return answerService.answerToMessage(messageId, answerText);
         } catch (MessageNotFoundException e) {
-            throw messageNotFoundResponse(e);
+            throw getMessageNotFoundResponse(e);
         }
     }
 
@@ -35,18 +35,18 @@ public class AnswerRestController {
         try {
             return answerService.updateAnswer(messageId, answerText);
         } catch (MessageNotFoundException e) {
-            throw messageNotFoundResponse(e);
+            throw getMessageNotFoundResponse(e);
         } catch (MessageUnansweredException e) {
-            throw messageUnansweredResponse(e);
+            throw getMessageUnansweredResponse(e);
         }
     }
 
-    private ResponseStatusException messageNotFoundResponse(MessageNotFoundException e) {
+    private ResponseStatusException getMessageNotFoundResponse(MessageNotFoundException e) {
         return new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Message Not Found", e);
     }
 
-    private ResponseStatusException messageUnansweredResponse(MessageUnansweredException e) {
+    private ResponseStatusException getMessageUnansweredResponse(MessageUnansweredException e) {
         return new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Message Answer Not Found", e);
     }

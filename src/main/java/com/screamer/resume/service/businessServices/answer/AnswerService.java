@@ -1,4 +1,4 @@
-package com.screamer.resume.service.answer;
+package com.screamer.resume.service.businessServices.answer;
 
 import com.screamer.resume.entity.Message;
 import com.screamer.resume.exceptions.message.MessageNotFoundException;

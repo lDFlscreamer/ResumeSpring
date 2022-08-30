@@ -1,7 +1,7 @@
-package com.screamer.resume.service.message;
+package com.screamer.resume.service.businessServices.message;
 
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.service.dbService.message.MessageDbService;
+import com.screamer.resume.service.dbServices.message.MessageDbService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 

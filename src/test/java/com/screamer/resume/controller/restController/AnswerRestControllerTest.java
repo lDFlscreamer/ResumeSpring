@@ -1,7 +1,7 @@
 package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.entity.Message;
-import com.screamer.resume.service.answer.AnswerService;
+import com.screamer.resume.service.businessServices.answer.AnswerService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

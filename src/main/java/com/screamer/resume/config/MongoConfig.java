@@ -1,7 +1,7 @@
 package com.screamer.resume.config;
 
-import com.screamer.resume.utils.listeners.MessageCascadeMongoEventListener;
-import com.screamer.resume.utils.listeners.UserCascadeMongoEventListener;
+import com.screamer.resume.config.listeners.MessageCascadeMongoEventListener;
+import com.screamer.resume.config.listeners.UserCascadeMongoEventListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;

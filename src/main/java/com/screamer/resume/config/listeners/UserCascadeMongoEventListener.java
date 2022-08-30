@@ -1,4 +1,4 @@
-package com.screamer.resume.utils.listeners;
+package com.screamer.resume.config.listeners;
 
 import com.screamer.resume.entity.Resume;
 import com.screamer.resume.entity.User;
