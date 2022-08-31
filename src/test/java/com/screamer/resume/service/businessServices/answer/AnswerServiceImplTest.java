@@ -40,7 +40,7 @@ class AnswerServiceImplTest {
         verify(messageDbService, times(1)).getMessageById(messageId);
         verify(messageDbService, times(1)).updateMessage(any(Message.class));
         assertNotNull(message.getAnswer(), "Answer is null");
-        assertEquals(message.getAnswer().getAnswerText(), answerText, "Answer text do not match");
+        assertEquals(answerText, message.getAnswer().getAnswerText(), "Answer text do not match");
     }
 
     @Test()
@@ -56,7 +56,7 @@ class AnswerServiceImplTest {
 
         verify(messageDbService, times(1)).getMessageById(messageId);
         verify(messageDbService, times(0)).updateMessage(any(Message.class));
-        assertEquals(notFoundException.getMessageId(), messageId, "message id do not match");
+        assertEquals(messageId, notFoundException.getMessageId(), "message id do not match");
     }
 
     @Test
@@ -74,7 +74,7 @@ class AnswerServiceImplTest {
         verify(messageDbService, times(1)).getMessageById(messageId);
         verify(messageDbService, times(1)).updateMessage(any(Message.class));
         assertNotNull(message.getAnswer(), "Answer is null");
-        assertEquals(message.getAnswer().getAnswerText(), answerText, "Answer text do not match");
+        assertEquals(answerText, message.getAnswer().getAnswerText(), "Answer text do not match");
     }
 
     @Test
@@ -92,7 +92,7 @@ class AnswerServiceImplTest {
 
         verify(messageDbService, times(1)).getMessageById(messageId);
         verify(messageDbService, times(0)).updateMessage(any(Message.class));
-        assertEquals(notFoundException.getMessageId(), messageId, "message id do not match");
+        assertEquals(messageId, notFoundException.getMessageId(), "message id do not match");
     }
 
     @Test
@@ -109,6 +109,6 @@ class AnswerServiceImplTest {
 
         verify(messageDbService, times(1)).getMessageById(messageId);
         verify(messageDbService, times(0)).updateMessage(any(Message.class));
-        assertEquals(unansweredException.getMessageId(), messageId, "message id do not match");
+        assertEquals(messageId, unansweredException.getMessageId(), "message id do not match");
     }
 }

@@ -40,7 +40,7 @@ class ResumeServiceImplTest {
         Resume resume = resumeService.getResume(resumeId);
 
         verify(resumeDbService, times(1)).getResumeById(resumeId);
-        assertEquals(resume, mockResume, "Resume do not match");
+        assertEquals(mockResume, resume, "Resume do not match");
     }
 
     @Test
@@ -54,7 +54,7 @@ class ResumeServiceImplTest {
         ResumeNotFoundException notFoundException = assertThrows(ResumeNotFoundException.class, executable);
 
         verify(resumeDbService, times(1)).getResumeById(resumeId);
-        assertEquals(notFoundException.getResumeId(), resumeId, "Resume id do not match");
+        assertEquals(resumeId, notFoundException.getResumeId(), "Resume id do not match");
     }
 
 
@@ -72,7 +72,7 @@ class ResumeServiceImplTest {
 
         verify(resumeFabric, times(1)).buildResume(resumeId, position, mockFile);
         verify(resumeDbService, times(1)).updateResume(mockResume);
-        assertEquals(resume, mockResume, "Resume do not match");
+        assertEquals(mockResume, resume, "Resume do not match");
     }
 
     @Test
@@ -88,6 +88,6 @@ class ResumeServiceImplTest {
 
         verify(resumeFabric, times(1)).buildResume(resumeId, position, mockFile);
         verify(resumeDbService, times(0)).updateResume(any(Resume.class));
-        assertEquals(exception.getCorruptedFile(), mockFile, "file do not match");
+        assertEquals(mockFile, exception.getCorruptedFile(), "file do not match");
     }
 }

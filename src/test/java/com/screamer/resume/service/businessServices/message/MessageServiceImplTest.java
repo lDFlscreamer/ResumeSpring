@@ -55,7 +55,7 @@ class MessageServiceImplTest {
         List<Message> publicMessage = messageService.getPublicMessage();
 
         verify(messageDbService, times(1)).getPublicMessage();
-        assertEquals(publicMessage, messageList, "received messages are different");
+        assertEquals(messageList, publicMessage, "received messages are different");
     }
 
     @Test
@@ -72,7 +72,7 @@ class MessageServiceImplTest {
         Message message = messageService.createNewMessage(auth, mockMessage);
 
         verify(messageDbService, times(1)).saveNewMessage(authName, mockMessage);
-        assertEquals(message, mockMessage, "Message do not match");
+        assertEquals(mockMessage, message, "Message do not match");
     }
 
     @Test
@@ -88,7 +88,7 @@ class MessageServiceImplTest {
         Message message = messageService.createNewMessage(auth, mockMessage);
 
         verify(messageDbService, times(1)).saveNewMessage(mockMessage);
-        assertEquals(message, mockMessage, "Message do not match");
+        assertEquals(mockMessage, message, "Message do not match");
     }
 
     @Test
@@ -100,7 +100,7 @@ class MessageServiceImplTest {
         Message message = messageService.updateMessage(mockMessage);
 
         verify(messageDbService, times(1)).updateMessage(mockMessage);
-        assertEquals(message, mockMessage, "Message do not match");
+        assertEquals(mockMessage, message, "Message do not match");
     }
 
     @Test
