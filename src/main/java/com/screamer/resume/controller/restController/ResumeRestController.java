@@ -1,6 +1,7 @@
 package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.entity.Resume;
+import com.screamer.resume.exceptions.resume.FileCorruptedException;
 import com.screamer.resume.exceptions.resume.ResumeNotFoundException;
 import com.screamer.resume.service.businessServices.resume.ResumeService;
 import org.springframework.http.HttpStatus;
@@ -35,15 +36,19 @@ public class ResumeRestController {
                                @RequestParam("position") String position,
                                @RequestParam("file") MultipartFile file) {
         try {
-            return resumeService.updateResume(resumeId,position,file);
-        } catch (ResumeNotFoundException e) {
-            throw getResumeNotFoundResponse(e);
+            return resumeService.updateResume(resumeId, position, file);
+        } catch (FileCorruptedException e) {
+            throw getFileCorruptedExceptionResponse(e);
         }
     }
-
 
     private ResponseStatusException getResumeNotFoundResponse(ResumeNotFoundException e) {
         return new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Resume Not Found", e);
+    }
+
+    private ResponseStatusException getFileCorruptedExceptionResponse(FileCorruptedException e) {
+        return new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "file corrupted", e);
     }
 }
