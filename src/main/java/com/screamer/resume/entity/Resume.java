@@ -61,14 +61,4 @@ public class Resume {
         this.resumeFile = resumeFile;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Resume resume = (Resume) o;
-
-        return _id != null ? _id.equals(resume._id) : resume._id == null;
-    }
-
 }
