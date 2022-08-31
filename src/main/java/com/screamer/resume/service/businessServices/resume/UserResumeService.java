@@ -5,7 +5,6 @@ import com.screamer.resume.entity.User;
 import com.screamer.resume.exceptions.resume.FileCorruptedException;
 import com.screamer.resume.service.dbServices.resume.ResumeDbService;
 import com.screamer.resume.service.dbServices.user.UserDbService;
-import com.screamer.resume.utils.ResumeEncoder;
 import com.screamer.resume.utils.ResumeFabric;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -19,10 +18,12 @@ public class UserResumeService {
 
     private final UserDbService userDbService;
     private final ResumeFabric resumeFabric;
+    private final ResumeDbService resumeDbService;
 
-    public UserResumeService(UserDbService userDbService, ResumeEncoder encoder, ResumeDbService resumeDbService, ResumeService resumeService, ResumeFabric resumeFabric) {
+    public UserResumeService(UserDbService userDbService, ResumeFabric resumeFabric, ResumeDbService resumeDbService) {
         this.userDbService = userDbService;
         this.resumeFabric = resumeFabric;
+        this.resumeDbService = resumeDbService;
     }
 
     public List<Resume> getAllResume(Authentication authentication) {
@@ -46,14 +47,16 @@ public class UserResumeService {
     }
 
     public User removeResumeFromUser(Authentication authentication, String resumeId) {
-            return removeResume(authentication, resumeId);
+        return removeResume(authentication, resumeId);
     }
 
     private User removeResume(Authentication authentication, String resumeId) {
         User user = userDbService.getOrCreate(authentication.getName());
-        user.getResumeList().removeIf(r->r.get_id().equals(resumeId));
+        List<Resume> resumeList = user.getResumeList();
+        boolean isRemovedFromUser = resumeList.removeIf(r -> r.get_id().equals(resumeId));
+        if (isRemovedFromUser) {
+            resumeDbService.deleteResume(resumeId);
+        }
         return userDbService.updateUser(user);
     }
-
-
 }

@@ -35,5 +35,7 @@ public class ResumeDbService {
         return updateResume(resumeById);
     }
 
-
+    public void deleteResume(String resumeId) {
+        resumeRepository.deleteById(resumeId);
+    }
 }
