@@ -166,8 +166,8 @@ class MessageDbServiceImplTest {
 
         messageDbService.deleteMessage(messageId);
 
-        verify(messageRepository, times(1)).deleteById(anyString());
         verify(messageRepository, times(1)).deleteById(messageId);
+        verify(messageRepository, atMostOnce()).deleteById(anyString());
     }
 
     @Test
