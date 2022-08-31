@@ -17,14 +17,13 @@ public class UserDbServiceImpl implements UserDbService {
         this.userRepository = userRepository;
     }
 
-
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public User getOrCreate(String userAuthId)  {
+    public User getOrCreate(String userAuthId) {
         try {
             return getUserByUserAuthId(userAuthId);
         } catch (UserNotFoundException e) {
@@ -52,6 +51,7 @@ public class UserDbServiceImpl implements UserDbService {
 
         return foundedUser.get();
     }
+
     @Override
     public User updateUser(User user) {
         return userRepository.save(user);

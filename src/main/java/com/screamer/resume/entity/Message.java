@@ -112,15 +112,4 @@ public class Message {
         return Objects.equals(_id, message._id);
     }
 
-
-    @Override
-    public String toString() {
-        return "Message{"
-                .concat("id='").concat(_id).concat("'")
-                .concat(", author='").concat(publicAuthorName).concat("'")
-                .concat(", title='").concat(title).concat("'")
-                .concat(", content='").concat(content).concat("'")
-                .concat("isRead=").concat(read ? "yes" : "No").concat("'")
-                .concat("}");
-    }
 }

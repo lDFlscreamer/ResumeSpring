@@ -35,12 +35,12 @@ public class MessageDbServiceImpl implements MessageDbService {
     }
 
     @Override
-    public List<Message> getAllUnreadMessage(){
+    public List<Message> getAllUnreadMessage() {
         return messageRepository.findAllByReadIsFalse();
     }
 
     @Override
-    public List<Message> getAllUnreadMessage(String author){
+    public List<Message> getAllUnreadMessage(String author) {
         return messageRepository.findAllByAuthor_UserAuthIdAndReadIsFalse(author);
     }
 
@@ -60,15 +60,15 @@ public class MessageDbServiceImpl implements MessageDbService {
     }
 
     @Override
-    public Message saveNewMessage(Message m) {
-        return messageRepository.save(m);
+    public Message saveNewMessage(Message message) {
+        return messageRepository.save(message);
     }
 
     @Override
-    public Message saveNewMessage(String authorId,Message m) {
+    public Message saveNewMessage(String authorId, Message message) {
         User author = userDbService.getOrCreate(authorId);
-        m.setAuthor(author);
-        return saveNewMessage(m);
+        message.setAuthor(author);
+        return saveNewMessage(message);
     }
 
     @Override
