@@ -55,6 +55,7 @@ class AnswerServiceImplTest {
         MessageNotFoundException notFoundException = assertThrows(MessageNotFoundException.class, executable);
 
         verify(messageDbService, times(1)).getMessageById(messageId);
+        verify(messageDbService, times(0)).updateMessage(any(Message.class));
         assertEquals(notFoundException.getMessageId(), messageId, "message id do not match");
     }
 
@@ -90,6 +91,7 @@ class AnswerServiceImplTest {
         MessageNotFoundException notFoundException = assertThrows(MessageNotFoundException.class, executable);
 
         verify(messageDbService, times(1)).getMessageById(messageId);
+        verify(messageDbService, times(0)).updateMessage(any(Message.class));
         assertEquals(notFoundException.getMessageId(), messageId, "message id do not match");
     }
 
@@ -106,6 +108,7 @@ class AnswerServiceImplTest {
         MessageUnansweredException unansweredException = assertThrows(MessageUnansweredException.class, executable);
 
         verify(messageDbService, times(1)).getMessageById(messageId);
+        verify(messageDbService, times(0)).updateMessage(any(Message.class));
         assertEquals(unansweredException.getMessageId(), messageId, "message id do not match");
     }
 }

@@ -87,6 +87,7 @@ class ResumeServiceImplTest {
         FileCorruptedException exception = assertThrows(FileCorruptedException.class, executable);
 
         verify(resumeFabric, times(1)).buildResume(resumeId, position, mockFile);
+        verify(resumeDbService, times(0)).updateResume(any(Resume.class));
         assertEquals(exception.getCorruptedFile(), mockFile, "file do not match");
     }
 }
