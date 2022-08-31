@@ -22,7 +22,6 @@ class AnswerTest {
         final String actualAnswerId = answer.get_id();
 
         assertEquals(answerId, actualAnswerId, "Answer Id do not match");
-
     }
 
     @Test
