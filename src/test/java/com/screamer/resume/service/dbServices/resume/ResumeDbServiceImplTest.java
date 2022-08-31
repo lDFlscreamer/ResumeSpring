@@ -101,5 +101,6 @@ class ResumeDbServiceImplTest {
         resumeDbService.deleteResume(resumeId);
 
         verify(resumeRepository, times(1)).deleteById(resumeId);
+        verify(resumeRepository, times(1)).deleteById(anyString());
     }
 }
