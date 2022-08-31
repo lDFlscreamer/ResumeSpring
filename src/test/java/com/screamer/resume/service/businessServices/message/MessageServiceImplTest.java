@@ -41,7 +41,6 @@ class MessageServiceImplTest {
         List<Message> allSavedMessages = messageService.getAllMessage();
 
         verify(messageDbService, times(1)).getAllSavedMessages();
-        assertEquals(allSavedMessages.size(), messageList.size(), "All message list size was changed");
         assertEquals(allSavedMessages, messageList, "received messages are different");
     }
 
@@ -56,7 +55,6 @@ class MessageServiceImplTest {
         List<Message> publicMessage = messageService.getPublicMessage();
 
         verify(messageDbService, times(1)).getPublicMessage();
-        assertEquals(publicMessage.size(), messageList.size(), "All message list size was changed");
         assertEquals(publicMessage, messageList, "received messages are different");
     }
 
@@ -68,7 +66,6 @@ class MessageServiceImplTest {
         User mockUser = mock(User.class);
 
         when(auth.getName()).thenReturn(authName);
-        when(mockMessage.getAuthor()).thenReturn(mockUser);
         when(messageDbService.saveNewMessage(authName, mockMessage)).thenReturn(mockMessage);
         when(userDbService.getOrCreate(authName)).thenReturn(mockUser);
 
@@ -76,8 +73,6 @@ class MessageServiceImplTest {
 
         verify(messageDbService, times(1)).saveNewMessage(authName, mockMessage);
         assertEquals(message, mockMessage, "Message do not match");
-        assertEquals(message.getAuthor(), mockUser, "Message author do not match");
-
     }
 
     @Test
