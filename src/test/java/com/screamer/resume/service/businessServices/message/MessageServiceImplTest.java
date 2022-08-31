@@ -76,6 +76,22 @@ class MessageServiceImplTest {
     }
 
     @Test
+    void createNewMessage_withoutAuth() {
+        Message mockMessage = new Message();
+        Authentication auth = null;
+        String authName = "authName";
+        User mockUser = mock(User.class);
+
+        when(messageDbService.saveNewMessage(mockMessage)).thenReturn(mockMessage);
+        when(userDbService.getOrCreate(authName)).thenReturn(mockUser);
+
+        Message message = messageService.createNewMessage(auth, mockMessage);
+
+        verify(messageDbService, times(1)).saveNewMessage(mockMessage);
+        assertEquals(message, mockMessage, "Message do not match");
+    }
+
+    @Test
     void updateMessage() {
         Message mockMessage = mock(Message.class);
 
