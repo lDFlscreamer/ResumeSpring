@@ -75,6 +75,22 @@ class MessageCascadeMongoEventListenerTest {
     }
 
     @Test
+    void onBeforeDelete_withoutMessage() {
+        BeforeDeleteEvent<Message> event = mock(BeforeDeleteEvent.class);
+        Document mockDocument = mock(Document.class);
+        Object documentId= mock(Object.class);
+
+        when(event.getSource()).thenReturn(mockDocument);
+        when(mockDocument.get("_id")).thenReturn(documentId);
+        when(mongoOperations.findById(documentId, Message.class)).thenReturn(null);
+
+        messageEventListener.onBeforeDelete(event);
+
+        verify(mongoOperations, times(1)).findById(documentId, Message.class);
+        verify(mongoOperations, never()).remove(any(Answer.class));
+    }
+
+    @Test
     void onBeforeDelete_withoutAnswer() {
         BeforeDeleteEvent<Message> event = mock(BeforeDeleteEvent.class);
         Document mockDocument = mock(Document.class);
