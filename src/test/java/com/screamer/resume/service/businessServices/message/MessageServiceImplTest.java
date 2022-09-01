@@ -22,13 +22,13 @@ import static org.mockito.Mockito.*;
 class MessageServiceImplTest {
 
     @Mock
-    MessageDbServiceImpl messageDbService;
+    private MessageDbServiceImpl messageDbService;
 
     @Mock
-    UserDbServiceImpl userDbService;
+    private UserDbServiceImpl userDbService;
 
     @InjectMocks
-    MessageServiceImpl messageService;
+    private MessageServiceImpl messageService;
 
     @Test
     void getAllMessage() {

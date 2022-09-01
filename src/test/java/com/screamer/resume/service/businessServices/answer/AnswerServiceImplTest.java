@@ -21,10 +21,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith({SpringExtension.class})
 class AnswerServiceImplTest {
     @Mock
-    MessageDbServiceImpl messageDbService;
+    private MessageDbServiceImpl messageDbService;
 
     @InjectMocks
-    AnswerServiceImpl answerService;
+    private AnswerServiceImpl answerService;
 
     @Test()
     void answerToMessage() throws MessageNotFoundException {

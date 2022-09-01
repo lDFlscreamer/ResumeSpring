@@ -26,14 +26,14 @@ import static org.mockito.Mockito.*;
 @ExtendWith({SpringExtension.class})
 class UserResumeServiceImplTest {
     @Mock
-    UserDbService userDbService;
+    private UserDbService userDbService;
     @Mock
-    ResumeFabric resumeFabric;
+    private ResumeFabric resumeFabric;
     @Mock
-    ResumeDbServiceImpl resumeDbService;
+    private ResumeDbServiceImpl resumeDbService;
 
     @InjectMocks
-    UserResumeServiceImpl userResumeService;
+    private UserResumeServiceImpl userResumeService;
 
     @Test
     void getAllResume() {
