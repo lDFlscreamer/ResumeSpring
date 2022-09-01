@@ -15,8 +15,7 @@ jobs:
         env:
           AUTH0_AUDIENCE: ${{secrets.AUTH0_AUDIENCE}}
           AUTH0_DOMAIN: ${{secrets.AUTH0_DOMAIN}}
-          LINKED_IN_CONSUMER_KEY: ${{secrets.LINKED_IN_CONSUMER_KEY}}
-          LINKED_IN_CONSUMER_SECRET: ${{secrets.LINKED_IN_CONSUMER_SECRET}}
+          AUTH0_CLIENT_SECRET: ${{secrets.AUTH0_CLIENT_SECRET}}
           MONGO_DB_NAME: ${{secrets.MONGO_DB_NAME}}
           MONGO_DB_PASS: ${{secrets.MONGO_DB_PASS}}
           MONGO_DB_USERNAME: ${{secrets.MONGO_DB_USERNAME}}
