@@ -29,14 +29,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class MessageRestControllerTest {
 
-    @MockBean
-    MessageDbService messageDbService;
-    @Autowired
-    private MockMvc mockMvc;
     private final MediaType APPLICATION_JSON_UTF8 = new MediaType(
             MediaType.APPLICATION_JSON.getType(),
             MediaType.APPLICATION_JSON.getSubtype(),
             StandardCharsets.UTF_8);
+    @MockBean
+    private MessageDbService messageDbService;
+    @Autowired
+    private MockMvc mockMvc;
 
     @Test
     @DisplayName("Get /message Test")
@@ -48,6 +48,7 @@ class MessageRestControllerTest {
                 .andDo(print())
                 .andExpect(status().isUnauthorized());
     }
+
     @Test
     @DisplayName("Get /message/public Test")
     void getPublicMessage() throws Exception {
@@ -58,6 +59,7 @@ class MessageRestControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk());
     }
+
     @Test
     @DisplayName("post /message tests")
     void createNewMessage() throws Exception {
