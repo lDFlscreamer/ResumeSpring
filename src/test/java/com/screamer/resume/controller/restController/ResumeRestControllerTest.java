@@ -55,7 +55,7 @@ class ResumeRestControllerTest {
                 .andDo(print())
                 .andReturn();
         String contentAsString = result.getResponse().getContentAsString();
-        Resume resume = jsonConverter.convertJsonToMap(contentAsString, Resume.class);
+        Resume resume = jsonConverter.convertJsonToObject(contentAsString, Resume.class);
 
         assertEquals(mockResume.get_id(), resume.get_id(), "Resume id do not match");
     }
@@ -73,7 +73,7 @@ class ResumeRestControllerTest {
                 .andDo(print())
                 .andReturn();
         String contentAsString = result.getResponse().getContentAsString();
-        Resume resume = jsonConverter.convertJsonToMap(contentAsString, Resume.class);
+        Resume resume = jsonConverter.convertJsonToObject(contentAsString, Resume.class);
 
         assertEquals(mockResume.get_id(), resume.get_id(), "Resume id do not match");
     }
@@ -121,7 +121,7 @@ class ResumeRestControllerTest {
                 .andDo(print())
                 .andReturn();
         String contentAsString = result.getResponse().getContentAsString();
-        Resume resume = jsonConverter.convertJsonToMap(contentAsString, Resume.class);
+        Resume resume = jsonConverter.convertJsonToObject(contentAsString, Resume.class);
 
         assertEquals(mockResume.get_id(), resume.get_id(), "Resume id do not match");
         assertEquals(mockResume.getPosition(), resume.getPosition(), "Resume position do not match");

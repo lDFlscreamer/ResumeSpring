@@ -54,7 +54,7 @@ class AnswerRestControllerTest {
                 .andDo(print())
                 .andReturn();
         String contentAsString = result.getResponse().getContentAsString();
-        Message message = jsonConverter.convertJsonToMap(contentAsString, Message.class);
+        Message message = jsonConverter.convertJsonToObject(contentAsString, Message.class);
 
         assertEquals(mockMessage.get_id(), message.get_id(), "Message id do not match");
     }
@@ -108,7 +108,7 @@ class AnswerRestControllerTest {
                 .andDo(print())
                 .andReturn();
         String contentAsString = result.getResponse().getContentAsString();
-        Message message = jsonConverter.convertJsonToMap(contentAsString, Message.class);
+        Message message = jsonConverter.convertJsonToObject(contentAsString, Message.class);
 
         assertEquals(mockMessage.get_id(), message.get_id(), "Message id do not match");
     }
