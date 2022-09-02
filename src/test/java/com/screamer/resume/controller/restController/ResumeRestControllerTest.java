@@ -2,6 +2,8 @@ package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.config.JwtDecoderTestConfig;
 import com.screamer.resume.entity.Resume;
+import com.screamer.resume.exceptions.resume.FileCorruptedException;
+import com.screamer.resume.exceptions.resume.ResumeNotFoundException;
 import com.screamer.resume.service.businessServices.resume.ResumeService;
 import com.screamer.resume.utils.JsonConverter;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -76,6 +79,20 @@ class ResumeRestControllerTest {
     }
 
     @Test
+    void getResume_withoutResume() throws Exception {
+        String resumeId = UUID.randomUUID().toString();
+
+        when(resumeService.getResume(resumeId)).thenThrow(new ResumeNotFoundException(resumeId));
+
+        this.mockMvc
+                .perform(
+                        get("/resume/".concat(resumeId))
+                                .header(HttpHeaders.AUTHORIZATION, "Bearer token"))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+
+    @Test
     void updateResume() throws Exception {
         String resumeId = UUID.randomUUID().toString();
         String position = "testPosition";
@@ -131,6 +148,35 @@ class ResumeRestControllerTest {
                                 .param("position", position)
                 )
                 .andExpect(status().isUnauthorized())
+                .andDo(print());
+    }
+
+    @Test
+    void updateResume_withIoException() throws Exception {
+        String resumeId = UUID.randomUUID().toString();
+        String position = "testPosition";
+        String fileName = "fileName";
+        MockMultipartFile file = new MockMultipartFile(
+                "file",
+                fileName,
+                MediaType.TEXT_PLAIN_VALUE,
+                "Hello, World!".getBytes()
+        );
+        Resume mockResume = new Resume();
+        mockResume.set_id(resumeId);
+        mockResume.setPosition(position);
+        mockResume.setResumeFileName(fileName);
+
+        when(resumeService.updateResume(resumeId, position, file)).thenThrow(new FileCorruptedException(file, new IOException()));
+
+        this.mockMvc
+                .perform(
+                        multipart("/resume/".concat(resumeId))
+                                .file(file)
+                                .header(HttpHeaders.AUTHORIZATION, "Bearer token")
+                                .param("position", position)
+                )
+                .andExpect(status().isNotAcceptable())
                 .andDo(print());
     }
 }
