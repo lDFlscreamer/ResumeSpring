@@ -41,7 +41,7 @@ public class UserResumeRestController {
     }
 
     @DeleteMapping("/{resumeId}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public User deleteResumeFromUser(Authentication authentication,
                                     @PathVariable String resumeId) {
         return userResumeService.removeResumeFromUser(authentication,resumeId);
