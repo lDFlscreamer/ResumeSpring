@@ -152,7 +152,7 @@ class ResumeRestControllerTest {
     }
 
     @Test
-    void updateResume_withIoException() throws Exception {
+    void updateResume_withFileCorrupted() throws Exception {
         String resumeId = UUID.randomUUID().toString();
         String position = "testPosition";
         String fileName = "fileName";
