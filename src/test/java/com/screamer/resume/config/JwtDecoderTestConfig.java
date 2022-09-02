@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @TestConfiguration
-public class JwtTestConfig {
+public class JwtDecoderTestConfig {
 
     @Bean
     @Primary
