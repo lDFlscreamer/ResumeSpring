@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("user/resume")
 public class UserResumeRestController {
 
-    final UserResumeService userResumeService;
+    private final UserResumeService userResumeService;
 
     public UserResumeRestController(UserResumeService userResumeService) {
         this.userResumeService = userResumeService;

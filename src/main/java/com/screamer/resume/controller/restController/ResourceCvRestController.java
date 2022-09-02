@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "resource/CV")
 public class ResourceCvRestController {
 
-    final
-    ResourceService resourceService;
+
+    private final ResourceService resourceService;
 
     public ResourceCvRestController(ResourceServiceImpl resourceService) {
         this.resourceService = resourceService;
