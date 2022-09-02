@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @Import({JwtDecoderTestConfig.class, JsonConverter.class})
 @AutoConfigureMockMvc
-class MessageRestControllerTest {
+class MessageRestControllerMvcTest {
 
     @Autowired
     private JsonConverter jsonConverter;
