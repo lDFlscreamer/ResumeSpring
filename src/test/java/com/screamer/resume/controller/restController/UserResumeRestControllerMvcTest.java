@@ -179,7 +179,7 @@ class UserResumeRestControllerMvcTest {
 
         assertEquals(mockUser.get_id(), user.get_id(), "user id do not match");
         verify(userResumeService, times(1))
-                .removeResumeFromUser(any(Authentication.class), resumeId);
+                .removeResumeFromUser(any(Authentication.class), eq(resumeId));
     }
 
     @Test
