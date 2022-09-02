@@ -21,7 +21,7 @@ import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -203,6 +203,8 @@ class MessageRestControllerTest {
                                 .header(HttpHeaders.AUTHORIZATION, "Bearer token"))
                 .andExpect(status().isNoContent())
                 .andDo(print());
+
+        verify(messageService,times(1)).deleteMessageById(messageId);
     }
 
     @Test
@@ -214,6 +216,8 @@ class MessageRestControllerTest {
                         delete("/message/".concat(messageId)))
                 .andExpect(status().isUnauthorized())
                 .andDo(print());
+
+        verify(messageService,never()).deleteMessageById(messageId);
     }
 
     @Test
@@ -224,6 +228,7 @@ class MessageRestControllerTest {
                                 .header(HttpHeaders.AUTHORIZATION, "Bearer token"))
                 .andExpect(status().isNoContent())
                 .andDo(print());
+        verify(messageService,times(1)).deleteAllMessages();
     }
 
     @Test
@@ -233,5 +238,6 @@ class MessageRestControllerTest {
                         delete("/message"))
                 .andExpect(status().isUnauthorized())
                 .andDo(print());
+        verify(messageService,never()).deleteAllMessages();
     }
 }
