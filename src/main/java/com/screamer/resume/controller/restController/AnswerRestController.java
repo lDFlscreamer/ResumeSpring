@@ -12,8 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("message")
 public class AnswerRestController {
 
-    final
-    AnswerService answerService;
+    private final AnswerService answerService;
 
     public AnswerRestController(AnswerService answerService) {
         this.answerService = answerService;

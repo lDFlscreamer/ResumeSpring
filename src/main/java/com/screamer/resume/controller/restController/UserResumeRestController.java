@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("user/resume")
 public class UserResumeRestController {
 
-    final UserResumeService userResumeService;
+    private final UserResumeService userResumeService;
 
     public UserResumeRestController(UserResumeService userResumeService) {
         this.userResumeService = userResumeService;
@@ -41,7 +41,7 @@ public class UserResumeRestController {
     }
 
     @DeleteMapping("/{resumeId}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public User deleteResumeFromUser(Authentication authentication,
                                     @PathVariable String resumeId) {
         return userResumeService.removeResumeFromUser(authentication,resumeId);
@@ -49,6 +49,6 @@ public class UserResumeRestController {
 
     private ResponseStatusException getFileCorruptedResponse(FileCorruptedException e) {
         return new ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "File Corrupted", e);
+                HttpStatus.NOT_ACCEPTABLE, "File Corrupted", e);
     }
 }

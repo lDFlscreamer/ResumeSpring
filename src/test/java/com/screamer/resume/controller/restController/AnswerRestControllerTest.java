@@ -1,57 +1,98 @@
 package com.screamer.resume.controller.restController;
 
 import com.screamer.resume.entity.Message;
+import com.screamer.resume.exceptions.message.MessageNotFoundException;
+import com.screamer.resume.exceptions.message.MessageUnansweredException;
 import com.screamer.resume.service.businessServices.answer.AnswerService;
-import org.junit.jupiter.api.DisplayName;
+import com.screamer.resume.service.businessServices.answer.AnswerServiceImpl;
+import com.screamer.resume.service.dbServices.message.MessageDbServiceImpl;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.http.HttpStatus;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@ExtendWith({SpringExtension.class})
 class AnswerRestControllerTest {
 
-    @MockBean
-    AnswerService answerService;
+    @Mock
+    private AnswerService answerService;
 
-    @Autowired
-    private MockMvc mockMvc;
+    @InjectMocks
+    private AnswerRestController controller;
 
     @Test
-    @DisplayName("POST /message/{id}/Answer test")
-    void answerToMessage() throws Exception {
-        Message message = mock(Message.class);
+    void answerToMessage() throws MessageNotFoundException {
         String messageId = UUID.randomUUID().toString();
-        when(answerService.answerToMessage(anyString(), anyString())).thenReturn(message);
+        String answerText = "text";
+        Message mockMessage=mock(Message.class);
 
-        this.mockMvc
-                .perform(post(String.format("/message/%s/Answer", messageId))
-                        .content("requestJson"))
-                .andExpect(status().isUnauthorized());
+        when(answerService.answerToMessage(messageId,answerText)).thenReturn(mockMessage);
+
+        Message message = controller.answerToMessage(messageId, answerText);
+
+        assertEquals(mockMessage,message,"Message do not match");
     }
 
     @Test
-    @DisplayName("PUT /message/{id}/Answer test")
-    void updateAnswer() throws Exception {
-        Message message = mock(Message.class);
+    void answerToMessage_withoutMessage() throws MessageNotFoundException {
         String messageId = UUID.randomUUID().toString();
-        when(answerService.updateAnswer(anyString(), anyString())).thenReturn(message);
+        String answerText = "text";
 
-        this.mockMvc
-                .perform(put(String.format("/message/%s/Answer", messageId))
-                        .content("requestJson"))
-                .andExpect(status().isUnauthorized());
+        when(answerService.answerToMessage(messageId,answerText)).thenThrow(new MessageNotFoundException(messageId));
+
+        Executable executable = () -> controller.answerToMessage(messageId, answerText);
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, executable);
+
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatus(), "Response status do not match");
+    }
+
+    @Test
+    void updateAnswer() throws MessageNotFoundException, MessageUnansweredException {
+        String messageId = UUID.randomUUID().toString();
+        String answerText = "text";
+        Message mockMessage=mock(Message.class);
+
+        when(answerService.updateAnswer(messageId,answerText)).thenReturn(mockMessage);
+
+        Message message = controller.updateAnswer(messageId, answerText);
+
+        assertEquals(mockMessage,message,"Message do not match");
+    }
+
+    @Test
+    void updateAnswer_withoutMessage() throws MessageUnansweredException, MessageNotFoundException {
+        String messageId = UUID.randomUUID().toString();
+        String answerText = "text";
+
+        when(answerService.updateAnswer(messageId,answerText)).thenThrow(new MessageNotFoundException(messageId));
+
+        Executable executable = () -> controller.updateAnswer(messageId, answerText);
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, executable);
+
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatus(), "Response status do not match");
+    }
+
+    @Test
+    void updateAnswer_withoutAnswer() throws MessageNotFoundException, MessageUnansweredException {
+        String messageId = UUID.randomUUID().toString();
+        String answerText = "text";
+
+        when(answerService.updateAnswer(messageId,answerText)).thenThrow(new MessageUnansweredException(messageId));
+
+        Executable executable = () -> controller.updateAnswer(messageId, answerText);
+        ResponseStatusException exception = assertThrows(ResponseStatusException.class, executable);
+
+        assertEquals(HttpStatus.NOT_FOUND, exception.getStatus(), "Response status do not match");
     }
 }

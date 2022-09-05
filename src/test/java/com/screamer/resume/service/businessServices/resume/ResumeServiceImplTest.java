@@ -23,12 +23,12 @@ import static org.mockito.Mockito.*;
 @ExtendWith({SpringExtension.class})
 class ResumeServiceImplTest {
     @Mock
-    ResumeDbServiceImpl resumeDbService;
+    private ResumeDbServiceImpl resumeDbService;
     @Mock
-    ResumeFabric resumeFabric;
+    private ResumeFabric resumeFabric;
 
     @InjectMocks
-    ResumeServiceImpl resumeService;
+    private ResumeServiceImpl resumeService;
 
     @Test
     void getResume() throws ResumeNotFoundException {

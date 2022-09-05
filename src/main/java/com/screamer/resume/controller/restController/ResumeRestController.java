@@ -49,6 +49,6 @@ public class ResumeRestController {
 
     private ResponseStatusException getFileCorruptedExceptionResponse(FileCorruptedException e) {
         return new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "file corrupted", e);
+                HttpStatus.NOT_ACCEPTABLE, "File corrupted", e);
     }
 }

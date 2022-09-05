@@ -5,6 +5,7 @@ def write_to_properties(propertiesFileSrc: str):
     f = open(propertiesFileSrc, "a")
     f.write("#Creadetials\n")
     f.write(f"auth0.audience={os.getenv('AUTH0_AUDIENCE')}\n")
+    f.write(f"auth0.clientSecret={os.getenv('AUTH0_CLIENT_SECRET')}\n")
     f.write(f"auth0.domain={os.getenv('AUTH0_DOMAIN')}\n")
     f.write(f"\n")
     f.write(f"spring.data.mongodb.database={os.getenv('MONGO_DB_NAME')}\n")
