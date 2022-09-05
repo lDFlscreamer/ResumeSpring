@@ -155,7 +155,7 @@ class UserResumeRestControllerMvcTest {
                                 .header(HttpHeaders.AUTHORIZATION, "Bearer token")
                                 .param("position", position)
                 )
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isNotAcceptable())
                 .andDo(print());
     }
 
