@@ -228,6 +228,7 @@ class MessageRestControllerMvcTest {
                                 .header(HttpHeaders.AUTHORIZATION, "Bearer token"))
                 .andExpect(status().isNoContent())
                 .andDo(print());
+
         verify(messageService,times(1)).deleteAllMessages();
     }
 
@@ -238,6 +239,7 @@ class MessageRestControllerMvcTest {
                         delete("/message"))
                 .andExpect(status().isUnauthorized())
                 .andDo(print());
+
         verify(messageService,never()).deleteAllMessages();
     }
 }
