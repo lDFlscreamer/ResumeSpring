@@ -34,6 +34,7 @@ class MessageRestControllerTest {
 
         List<Message> messages = controller.getAllMessage();
 
+        verify(messageService, times(1)).getAllMessage();
         assertEquals(messageList.size(), messages.size(), "message list do not match");
     }
 
@@ -47,6 +48,7 @@ class MessageRestControllerTest {
 
         List<Message> publicMessages = controller.getPublicMessage();
 
+        verify(messageService, times(1)).getPublicMessage();
         assertEquals(messageList.size(), publicMessages.size(), "message list do not match");
     }
 
@@ -59,6 +61,7 @@ class MessageRestControllerTest {
 
         Message message = controller.createNewMessage(mockAuth, mockMessage);
 
+        verify(messageService, times(1)).createNewMessage(mockAuth, mockMessage);
         assertEquals(mockMessage.get_id(), message.get_id(), "message id do not match");
     }
 
@@ -70,6 +73,7 @@ class MessageRestControllerTest {
 
         Message message = controller.updateMessage(mockMessage);
 
+        verify(messageService, times(1)).updateMessage(mockMessage);
         assertEquals(mockMessage.get_id(), message.get_id(), "message id do not match");
     }
 
@@ -79,8 +83,8 @@ class MessageRestControllerTest {
 
         controller.deleteMessageById(messageId);
 
-        verify(messageService,times(1)).deleteMessageById(messageId);
-        verify(messageService,times(1)).deleteMessageById(anyString());
+        verify(messageService, times(1)).deleteMessageById(messageId);
+        verify(messageService, times(1)).deleteMessageById(anyString());
     }
 
     @Test
@@ -88,6 +92,6 @@ class MessageRestControllerTest {
 
         controller.deleteAllMessages();
 
-        verify(messageService,times(1)).deleteAllMessages();
+        verify(messageService, times(1)).deleteAllMessages();
     }
 }
