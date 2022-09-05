@@ -49,6 +49,6 @@ public class UserResumeRestController {
 
     private ResponseStatusException getFileCorruptedResponse(FileCorruptedException e) {
         return new ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "File Corrupted", e);
+                HttpStatus.NOT_ACCEPTABLE, "File Corrupted", e);
     }
 }
