@@ -3,29 +3,24 @@ package com.screamer.resume.controller.restController;
 import com.screamer.resume.entity.Resume;
 import com.screamer.resume.exceptions.resume.FileCorruptedException;
 import com.screamer.resume.exceptions.resume.ResumeNotFoundException;
-import com.screamer.resume.service.businessServices.message.MessageService;
 import com.screamer.resume.service.businessServices.resume.ResumeService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith({SpringExtension.class})
 class ResumeRestControllerTest {
@@ -74,13 +69,13 @@ class ResumeRestControllerTest {
                 MediaType.TEXT_PLAIN_VALUE,
                 "Hello, World!".getBytes()
         );
-        Resume mockResume=mock(Resume.class);
+        Resume mockResume = mock(Resume.class);
 
-        when(resumeService.updateResume(resumeId,position,file)).thenReturn(mockResume);
+        when(resumeService.updateResume(resumeId, position, file)).thenReturn(mockResume);
 
         Resume resume = controller.updateResume(resumeId, position, file);
 
-        verify(resumeService, times(1)).updateResume(resumeId,position,file);
+        verify(resumeService, times(1)).updateResume(resumeId, position, file);
         assertEquals(mockResume, resume, "Resume do not match");
     }
 
@@ -97,13 +92,13 @@ class ResumeRestControllerTest {
         );
         FileCorruptedException fileCorruptedException = new FileCorruptedException(file, new IOException());
 
-        when(resumeService.updateResume(resumeId,position,file))
+        when(resumeService.updateResume(resumeId, position, file))
                 .thenThrow(fileCorruptedException);
 
-        Executable executable = () -> controller.updateResume(resumeId,position,file);
+        Executable executable = () -> controller.updateResume(resumeId, position, file);
         ResponseStatusException exception = assertThrows(ResponseStatusException.class, executable);
 
-        verify(resumeService, times(1)).updateResume(resumeId,position,file);
+        verify(resumeService, times(1)).updateResume(resumeId, position, file);
         assertEquals(HttpStatus.NOT_ACCEPTABLE, exception.getStatus(), "Response status do not match");
         assertEquals(fileCorruptedException, exception.getCause(), "Cause do not match");
     }
